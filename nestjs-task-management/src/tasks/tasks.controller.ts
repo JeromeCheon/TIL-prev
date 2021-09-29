@@ -1,6 +1,7 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Patch, Post, Query } from '@nestjs/common';
 import { title } from 'process';
 import { CreateTaskDto } from './dto/create-task.dto';
+import { GetTasksFilterDto } from './dto/get-tasks-filter.dto';
 import { Task, TaskStatus } from './task.model';
 import { TasksService } from './tasks.service';
 
@@ -10,8 +11,14 @@ export class TasksController {
   constructor(private tasksService: TasksService) {}
   // controller에 다음과 같은 handler를 넣어주는 거야
   @Get()
-  getAllTasks(): Task[] {
-    return this.tasksService.getAllTasks();
+  getTasks(@Query() filterDto: GetTasksFilterDto): Task[] {
+    // if we have any filters defined, call tasksService.getTaskWilFilters
+    // otherwise, just get all tasks
+    if (Object.keys(filterDto).length) {
+      return this.tasksService.getTasksWithFilters(filterDto);
+    } else {
+      return this.tasksService.getAllTasks();
+    }
   }
   // http://localhost:3000.tasks/~~~
   @Get('/:id') // colon은 path 파라미터라는 뜻이야 라는 걸 전달
