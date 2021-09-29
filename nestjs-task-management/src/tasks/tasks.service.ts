@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { Task, TaskStatus } from './task.model';
 import { v4 as uuid } from 'uuid';
 import { CreateTaskDto } from './dto/create-task.dto';
@@ -34,7 +34,17 @@ export class TasksService {
     return tasks;
   }
   getTaskById(id: string): Task {
-    return this.tasks.find((task) => task.id === id); // 같은 걸 찾으면 true를 리턴하니까 이렇게 찾을 수 있어.
+
+    // try to get task
+    const found = this.tasks.find((task) => task.id === id); // 같은 걸 찾으면 true를 리턴하니까 이렇게 찾을 수 있어.
+
+    // if not found, throw an error (404 not found)
+    if (!found) {
+      // throw new NotFoundException(); 아래 처럼 커스터마이징 할 수도 있다.
+      throw new NotFoundException(`Task with ID "${id}" not found`);
+    }
+    // otherwise, return the found task
+    return found;
   }
   deleteTask(id: string): void {
     this.tasks = this.tasks.filter((task) => task.id !== id);
