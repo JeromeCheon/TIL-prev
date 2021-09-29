@@ -18,8 +18,10 @@ import { TasksService } from './tasks.service';
 @Controller('tasks') // url route
 export class TasksController {
   // 이렇게 파라미터를 넣어주면 자동으로 위에 생성이 돼
-  constructor(private tasksService: TasksService) {}
-  // controller에 다음과 같은 handler를 넣어주는 거야
+  constructor(private tasksService: TasksService) { }
+  
+  // typeorm 적용 전 코드
+  /*// controller에 다음과 같은 handler를 넣어주는 거야
   @Get()
   getTasks(@Query() filterDto: GetTasksFilterDto): Task[] {
     // if we have any filters defined, call tasksService.getTaskWilFilters
@@ -63,5 +65,5 @@ export class TasksController {
     @Body() createTaskDto: CreateTaskDto,
   ): Task {
     return this.tasksService.createTask(createTaskDto);
-  }
+  }*/
 }

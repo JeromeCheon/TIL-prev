@@ -6,9 +6,11 @@ import { GetTasksFilterDto } from './dto/get-tasks-filter.dto';
 
 @Injectable()
 export class TasksService {
-  private tasks: Task[] = []; // 이렇게 Task 타입의 array라는 것 명시
+  // private tasks: Task[] = []; // 이렇게 Task 타입의 array라는 것 명시
 
-  getAllTasks(): Task[] {
+
+  // typeorm 적용 전
+  /*getAllTasks(): Task[] {
     return this.tasks;
   }
 
@@ -68,5 +70,5 @@ export class TasksService {
     // 생성하니까 우리 task 리스트에 먼저 넣어주고, 리턴해
     this.tasks.push(task);
     return task;
-  }
+  }*/
 }
