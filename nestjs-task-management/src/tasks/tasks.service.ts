@@ -1,6 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { Task, TaskStatus } from './task.model';
 import { v4 as uuid } from 'uuid';
+import { CreateTaskDto } from './dto/create-task.dto';
 
 @Injectable()
 export class TasksService {
@@ -9,7 +10,11 @@ export class TasksService {
   getAllTasks(): Task[] {
     return this.tasks;
   }
-  createTask(title: string, description: string): Task {
+  getTaskById(id: string): Task {
+    return this.tasks.find((task) => task.id === id); // 같은 걸 찾으면 true를 리턴하니까 이렇게 찾을 수 있어.
+  }
+  createTask(createTaskDto: CreateTaskDto): Task {
+    const { title, description } = createTaskDto;
     const task: Task = {
       // 자 이제 id를 어떻겍 auto generate 시켜줄까? 다양한 방법이 있겠지만
       // 여기서 우린 uuid라는 걸 install 해서 써보자
