@@ -12,14 +12,19 @@ import { title } from 'process';
 import { CreateTaskDto } from './dto/create-task.dto';
 import { GetTasksFilterDto } from './dto/get-tasks-filter.dto';
 import { UpdateTaskStatusDto } from './dto/update-task-status.dto';
-import { Task, TaskStatus } from './task.model';
+import { TaskStatus } from './task-status.enum';
+import { Task } from './task.entity';
 import { TasksService } from './tasks.service';
 
 @Controller('tasks') // url route
 export class TasksController {
   // 이렇게 파라미터를 넣어주면 자동으로 위에 생성이 돼
-  constructor(private tasksService: TasksService) { }
-  
+  constructor(private tasksService: TasksService) {}
+
+  @Get('/:id')
+  getTaskById(@Param('id') id: string): Promise<Task> {
+    return this.tasksService.getTaskById(id);
+  }
   // typeorm 적용 전 코드
   /*// controller에 다음과 같은 handler를 넣어주는 거야
   @Get()
