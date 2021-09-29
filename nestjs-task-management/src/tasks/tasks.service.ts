@@ -13,6 +13,9 @@ export class TasksService {
   getTaskById(id: string): Task {
     return this.tasks.find((task) => task.id === id); // 같은 걸 찾으면 true를 리턴하니까 이렇게 찾을 수 있어.
   }
+  deleteTask(id: string): void {
+    this.tasks = this.tasks.filter((task) => task.id !== id);
+  }
   createTask(createTaskDto: CreateTaskDto): Task {
     const { title, description } = createTaskDto;
     const task: Task = {
