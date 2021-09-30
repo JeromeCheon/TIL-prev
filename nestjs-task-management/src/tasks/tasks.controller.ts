@@ -25,6 +25,12 @@ export class TasksController {
   getTaskById(@Param('id') id: string): Promise<Task> {
     return this.tasksService.getTaskById(id);
   }
+
+  @Post()
+  createTask(@Body() createTaskDto: CreateTaskDto): Promise<Task> {
+    return this.tasksService.createTask(createTaskDto);
+  }
+
   // typeorm 적용 전 코드
   /*// controller에 다음과 같은 handler를 넣어주는 거야
   @Get()

@@ -20,6 +20,10 @@ export class TasksService {
     }
     return found;
   }
+
+  createTask(createTaskDto: CreateTaskDto): Promise<Task> {
+    return this.tasksRepository.createTask(createTaskDto);
+  }
   // private tasks: Task[] = []; // 이렇게 Task 타입의 array라는 것 명시
 
   // typeorm 적용 전
