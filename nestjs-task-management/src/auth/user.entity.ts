@@ -6,7 +6,7 @@ export class User {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column()
+  @Column({ unique: true }) // duplicate 방지목적으로 unique 옵션을 둔다.
   username: string;
 
   @Column()
