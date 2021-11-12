@@ -8,6 +8,7 @@ import { JwtModule } from '@nestjs/jwt';
 
 @Module({
   imports: [
+    // jwt = JSON Web Token
     PassportModule.register({ defaultStrategy: 'jwt' }),
     JwtModule.register({
       secret: 'topSecret51',
