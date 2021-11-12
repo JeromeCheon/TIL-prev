@@ -1,3 +1,4 @@
+import { AuthGuard } from '@nestjs/passport';
 import {
   Body,
   Controller,
@@ -7,6 +8,7 @@ import {
   Patch,
   Post,
   Query,
+  UseGuards,
 } from '@nestjs/common';
 import { title } from 'process';
 import { CreateTaskDto } from './dto/create-task.dto';
@@ -17,6 +19,7 @@ import { Task } from './task.entity';
 import { TasksService } from './tasks.service';
 
 @Controller('tasks') // url route
+@UseGuards(AuthGuard())
 export class TasksController {
   // 이렇게 파라미터를 넣어주면 자동으로 위에 생성이 돼
   constructor(private tasksService: TasksService) {}
