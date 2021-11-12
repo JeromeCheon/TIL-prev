@@ -1,3 +1,4 @@
+import { User } from './../auth/user.entity';
 import { AuthGuard } from '@nestjs/passport';
 import {
   Body,
@@ -17,6 +18,7 @@ import { UpdateTaskStatusDto } from './dto/update-task-status.dto';
 import { TaskStatus } from './task-status.enum';
 import { Task } from './task.entity';
 import { TasksService } from './tasks.service';
+import { GetUser } from 'src/auth/get-user.decorator';
 
 @Controller('tasks') // url route
 @UseGuards(AuthGuard())
@@ -35,8 +37,11 @@ export class TasksController {
   }
 
   @Post()
-  createTask(@Body() createTaskDto: CreateTaskDto): Promise<Task> {
-    return this.tasksService.createTask(createTaskDto);
+  createTask(
+    @Body() createTaskDto: CreateTaskDto,
+    @GetUser() user: User,
+  ): Promise<Task> {
+    return this.tasksService.createTask(createTaskDto, user);
   }
 
   @Delete('/:id')
