@@ -39,7 +39,7 @@ export class TasksRepository extends Repository<Task> {
     return task;
   }
 
-  async deleteTask(id: string): Promise<void> {
+  async deleteTask(id: string, user: User): Promise<void> {
     // delete랑 remove가 있는데 delete 추천. code load를 줄여줄 수 있지
     // const found = await this.findOne(id);
     // if (!found) {
@@ -48,7 +48,7 @@ export class TasksRepository extends Repository<Task> {
     //   );
     // }
     // await this.remove(found);
-    const result = await this.delete(id);
+    const result = await this.delete({ id, user });
     // console.log(result);
     if (result.affected === 0) {
       throw new NotFoundException(
