@@ -3,30 +3,58 @@ provider "aws" {
 }
 
 variable "vpc_name" {
-  // 모든 인자값들은 옵셔널한 값들
   description = "생성되는 VPC의 이름"
+  type        = string
+  default     = "default"
 }
 
-module "vpc" { //  모듈 지시어를 넣고 여기에 이름을 명명하면 된다. 
+locals {
+  common_tags = {
+    Project = "Network"
+    Owner   = "posquit0"
+  }
+}
+
+output "vpc_name" {
+  value = module.vpc.name
+}
+
+output "vpc_id" {
+  value = module.vpc.id
+}
+
+output "vpc_cidr" {
+  description = "생성된 VPC의 CIDR 영역"
+  value = module.vpc.cidr_block
+}
+
+output "subnet_groups" {
+  value = {
+    public  = module.subnet_group__public
+    private = module.subnet_group__private
+  }
+}
+
+module "vpc" {
   source  = "tedilabs/network/aws//modules/vpc"
   version = "0.24.0"
 
-  name       = var.vpc_name # 이런식으로 var.을 붙여서 사용함
-  cidr_block = "10.0.0.0/16"
+  name                  = var.vpc_name
+  cidr_block            = "10.0.0.0/16"
 
   internet_gateway_enabled = true
 
   dns_hostnames_enabled = true
   dns_support_enabled   = true
 
-  tags = {}
+  tags = local.common_tags
 }
 
 module "subnet_group__public" {
   source  = "tedilabs/network/aws//modules/subnet-group"
   version = "0.24.0"
 
-  name                    = "${module.vpc.name}-public" # module을 참조할 때는 이처럼 string interpolation 사용
+  name                    = "${module.vpc.name}-public"
   vpc_id                  = module.vpc.id
   map_public_ip_on_launch = true
 
@@ -41,7 +69,7 @@ module "subnet_group__public" {
     }
   }
 
-  tags = {}
+  tags = local.common_tags
 }
 
 module "subnet_group__private" {
@@ -63,7 +91,7 @@ module "subnet_group__private" {
     }
   }
 
-  tags = {}
+  tags = local.common_tags
 }
 
 module "route_table__public" {
@@ -82,7 +110,7 @@ module "route_table__public" {
     },
   ]
 
-  tags = {}
+  tags = local.common_tags
 }
 
 module "route_table__private" {
@@ -94,7 +122,7 @@ module "route_table__private" {
 
   subnets = module.subnet_group__private.ids
 
-  ipv4_routes = [] # internet traffic이 흐르지 않게 private을 설정하였음
+  ipv4_routes = []
 
-  tags = {}
+  tags = local.common_tags
 }
