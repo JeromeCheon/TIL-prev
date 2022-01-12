@@ -176,3 +176,9 @@ cython_debug/
 *.csv
 *.xlsx
 .DS_Store
+
+# terraform
+*.tfstate
+*.tfstate.backup
+.terraform/
+*.hcl
