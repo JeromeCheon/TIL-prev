@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: object-count-quota
+  namespace: fastcampus
+spec:
+  hard:
+    limits.cpu: "5000m"
+    limits.memory: "8Gi"
+    count/pods: 10
+    count/replicationcontrollers: 10
+    count/replicasets.apps: 10
+    count/deployments.apps: 10
+    count/statefulsets.apps: 10
+    count/jobs.batch: 3
+    count/cronjobs.batch: 3
+    count/services: 5
+    count/services.nodeports: 0
+    count/services.loadbalancers: 0
+    count/configmaps: 10
+    count/secrets: 10
+    count/persistentvolumeclaims: 5
+    count/resourcequotas: 3
