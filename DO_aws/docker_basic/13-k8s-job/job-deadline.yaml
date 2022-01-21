@@ -1,0 +1,13 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: hello
+spec:
+  activeDeadlineSeconds: 3
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+      - name: hello
+        image: ubuntu:focal
+        command: ["sh", "-c", "sleep 5; echo Hello World!"]
