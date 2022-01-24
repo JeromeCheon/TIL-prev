@@ -1,0 +1,6 @@
+context: {}
+
+remote_states:
+  "network":
+    organization: "jerome-test"
+    workspace: "terraform-lab-network"
