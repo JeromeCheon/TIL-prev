@@ -2,9 +2,9 @@
   "include": ["src/**/*.ts"],
   "exclude": ["node_modules"],
   "compilerOptions": {
-    "module": "commonjs",
+    "module": "es6",
     "rootDir": "src",
     "outDir": "dist",
-    "target": "es5"
+    "target": "es6"
   }
 }
