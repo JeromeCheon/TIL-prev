@@ -5,6 +5,9 @@
     "module": "es6",
     "rootDir": "src",
     "outDir": "dist",
-    "target": "es6"
+    "target": "es6",
+    "sourceMap": true,
+    "removeComments": true
+    // "noImplicitAny": true // 현 커밋에서는 잠깐 옵션 꺼두기. 이후 매개변수에 타입 지정후 해제
   }
 }
