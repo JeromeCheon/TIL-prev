@@ -1,4 +1,4 @@
-import { Controller, Get, Param } from '@nestjs/common';
+import { Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
 
 @Controller('movies')
 export class MoviesController {
@@ -8,7 +8,20 @@ export class MoviesController {
   }
 
   @Get('/:id')
-  getOne(@Param('id') id: string) {
-    return `This will return one movie of ${id}`;
+  getOne(@Param('id') movieId: string) {
+    return `This will return one movie of ${movieId}`;
+  }
+
+  @Post()
+  create() {
+    return 'This will create a movie';
+  }
+  @Delete('/:id')
+  delete(@Param('id') movieId: string) {
+    return `This will delete a movie of ${movieId}`;
+  }
+  @Patch()
+  patch(@Param('id') movieId: string) {
+    return `This will patch a movie of ${movieId}`;
   }
 }
