@@ -6,4 +6,9 @@ export class MoviesController {
   getAll(): string {
     return 'This will return all movies';
   }
+
+  @Get('/:id')
+  getOne(@Param('id') id: string) {
+    return `This will return one movie of ${id}`;
+  }
 }
