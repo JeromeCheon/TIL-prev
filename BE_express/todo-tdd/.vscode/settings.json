@@ -1,0 +1,8 @@
+{
+	"editor.formatOnPaste": true,
+	"editor.formatOnSave": true,
+	"javascript.format.semicolons": "insert",
+	"typescript.format.semicolons": "insert",
+	"yaml.format.singleQuote": true,
+	"editor.defaultFormatter": "esbenp.prettier-vscode"
+}
