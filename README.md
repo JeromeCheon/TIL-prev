@@ -20,6 +20,8 @@ Server Side Rendering
 ## BE
 
 ### Express
+- Udemy 강좌를 통한 Jest(Javascript Testing) Library
+  - Nodejs Express - unit testing/integration tests with Jest
 
 ### NestJS
 - nestJS [노션 정리 내용](https://lavender-noodle-3fc.notion.site/NestJS-0b1dd7f7c3db4e21ba5daffd5c43e8cc)
