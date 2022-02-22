@@ -1,11 +1,10 @@
 package main
 
 import (
+	"BE_Go/src/accounts"
 	"fmt"
-
-	"BE_Go/src/banking"
 )
 func main()  {
-	account := banking.Account{Owner:"jerome", Balance: 1000}
+	account := accounts.NewAccount("jerome")
 	fmt.Println(account)
 }
