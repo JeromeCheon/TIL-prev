@@ -18,15 +18,19 @@ func main()  {
 	// }
 	// // fmt.Println(account.Balance(), account.Owner())  // 이렇게 해줄수도 있겠지만, 함수가 기본적으로 지원해주는 기본 메서드가 있어
 	// fmt.Println(account)
-	dictionary := dict.Dictionary{
-		"first": "First word",
-	}
-	word := "hello"
-	definition := "Greeting"
-	err := dictionary.Add(word, definition)
-	// definition, err :=dictionary.Search("second")
+	dictionary := dict.Dictionary{}
+	baseWord := "hello"
+	dictionary.Add(baseWord, "First")
+	// err := dictionary.Update(baseWord, "Second")
+	// if err != nil {
+	// 	fmt.Println(err)
+	// }
+	dictionary.Search(baseWord)
+	// fmt.Println(word)
+	dictionary.Delete(baseWord)
+	word, err := dictionary.Search(baseWord)
 	if err != nil {
 		fmt.Println(err)
 	}
-	fmt.Println(definition)
+	fmt.Println(word)
 }
