@@ -13,5 +13,6 @@ func main()  {
 		// log.Fatalln(err)
 		fmt.Println(err)
 	}
-	fmt.Println(account.Balance())
+	// fmt.Println(account.Balance(), account.Owner())  // 이렇게 해줄수도 있겠지만, 함수가 기본적으로 지원해주는 기본 메서드가 있어
+	fmt.Println(account)
 }
