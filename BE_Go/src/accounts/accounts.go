@@ -1,10 +1,14 @@
 package accounts
 
+import "errors"
+
 // Account struct -> comment를 반드시 붙이게끔 lint가 강제해
 type Account struct {
 	owner string
 	balance int
 }
+
+var errNoMoney = errors.New("can't withdraw")
 
 // NewAccount creates Account
 func NewAccount(owner string) *Account {
@@ -25,6 +29,11 @@ func (a Account) Balance() int {
 }
 
 // Withdraw x amount from your account
-func (a *Account) Withdraw(amount int)  {
+func (a *Account) Withdraw(amount int) error {
+	if a.balance < amount {
+		// return errors.New("Can't withdraw you are poor")
+		return errNoMoney
+	}
 	a.balance -= amount
+	return nil
 }
