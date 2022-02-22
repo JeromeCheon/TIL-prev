@@ -21,7 +21,10 @@ func main()  {
 	dictionary := dict.Dictionary{
 		"first": "First word",
 	}
-	definition, err :=dictionary.Search("first")
+	word := "hello"
+	definition := "Greeting"
+	err := dictionary.Add(word, definition)
+	// definition, err :=dictionary.Search("second")
 	if err != nil {
 		fmt.Println(err)
 	}
