@@ -10,6 +10,7 @@ class Person2 {
 	set name(n: string) {
 		this._name = n;
 	}
+	// 이렇게 static을 사용해서는 공통적인 내용을 공유할 수 있음
 	public static CITY = 'Seoul';
 }
 
@@ -17,4 +18,5 @@ const p22: Person2 = new Person2('Jerome', 28);
 console.log(p22.name, p22.age); // get을 하는 함수 getter
 p22.name = 'jerome'; // set을 하는 함수 setter
 console.log(p22.name, p22.age);
+
 console.log(Person2.CITY);
