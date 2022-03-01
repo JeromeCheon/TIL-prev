@@ -10,9 +10,11 @@ class Person2 {
 	set name(n: string) {
 		this._name = n;
 	}
+	public static CITY = 'Seoul';
 }
 
 const p22: Person2 = new Person2('Jerome', 28);
 console.log(p22.name, p22.age); // get을 하는 함수 getter
 p22.name = 'jerome'; // set을 하는 함수 setter
 console.log(p22.name, p22.age);
+console.log(Person2.CITY);
