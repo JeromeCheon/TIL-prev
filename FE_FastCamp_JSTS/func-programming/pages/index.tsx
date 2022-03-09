@@ -1,7 +1,8 @@
 import type { NextPage } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
-import { totalPrice } from '../src/clip3_1';
+import { totalPrice } from '../src/clip3_2';
+import { list1 } from '../src/clip3_2';
 import styles from '../styles/Home.module.css';
 
 const Home: NextPage = () => {
@@ -14,6 +15,7 @@ const Home: NextPage = () => {
 			</Head>
 
 			<main className={styles.main}>
+				{list1()}
 				<h1>total price: {totalPrice}</h1>
 			</main>
 			<footer className={styles.footer}>
