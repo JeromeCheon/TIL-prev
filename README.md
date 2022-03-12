@@ -3,7 +3,9 @@ This repository is for what I learned today in programming
 
 ## FE
 
-### Javascript
+### JS and TS
+함수형 프로그래밍 학습 -> fastcampus 강의 수강
+
 
 ### React
 
