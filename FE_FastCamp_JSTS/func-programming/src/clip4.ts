@@ -23,6 +23,25 @@ export function list3() {
 	// 다른 부수효과를 방지한다.
 	return priceOfOrange() * 100;
 }
+
+const priceOfFruit = {
+	tomato: 7000,
+	orange: 15000,
+	apple: 10000,
+};
+
+function getPrice(name: string): number {
+	if (name === 'tomato') {
+		return 7000;
+	} else if (name === 'orange') {
+		return 15000;
+	} else if (name === 'apple') {
+		return 10000;
+	}
+	// 근데 이런식으로 하는 것도 매 문자열을 비교해줘야 하니까 비효율적이네?
+	// dictionary나 map 같은 자료구조로 만들어볼 수 있을텐데 그게 priceOfFruit 오브젝트가 될 것
+	return 0;
+}
 export function getTotalPrice() {
 	return list2();
 }
