@@ -1,0 +1,12 @@
+{
+	"presets": [
+		[
+			// target을 지정함으로써 브라우저의 상위 버전 두개와 한국에서 5% 점유율을 가지고 있는 브라우저에
+			// 대응하여 컴파일되도록 설정
+			"@babel/preset-env",
+			{ "targets": { "browsers": ["last 2 versions", ">= 5% in KR"] } }
+		],
+		// 또 리액트도 컴파일될 수 있도록 함
+		"@babel/react"
+	]
+}
