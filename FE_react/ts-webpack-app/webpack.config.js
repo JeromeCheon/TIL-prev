@@ -7,7 +7,7 @@ module.exports = {
 	entry: {
 		// 번들 파일로 만들기 위한 시작 파일 설정
 		// 생성될 번들 파일은 js 폴더 하위에 app.js라는 이름으로 생성될 것이며 이 파일은 ./src/App.jsx를 시작으로 번들링함
-		'js/app': ['./src/App.jsx'],
+		'js/app': ['./src/App.js'],
 	},
 	output: {
 		// 생성된 번들 파일은 ./dist/ 폴더에 생성됨. 없으면 먼저 dist 폴더 생성함
