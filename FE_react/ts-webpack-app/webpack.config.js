@@ -1,7 +1,7 @@
 //ts-webpack-app
 const path = require('path'); // 절대 경로를 참조하기 위해 path를 불러온다
 
-// const HtmlWebpackPlugin = require('html-webpack-plugin'); // html을 다루기 위한 플러그인을 불러옴
+const HtmlWebpackPlugin = require('html-webpack-plugin'); // html을 다루기 위한 플러그인을 불러옴
 // For Typescript
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
@@ -11,7 +11,7 @@ module.exports = {
 		// 생성될 번들 파일은 js 폴더 하위에 app.js라는 이름으로 생성될 것이며 이 파일은 ./src/App.jsx를 시작으로 번들링함
 		// 'js/app': ['./src/App.js'],
 		// For Typescript
-		'js/app': ['./src/App.ts'],
+		'js/app': ['./src/App.tsx'],
 	},
 	output: {
 		// 생성된 번들 파일은 ./dist/ 폴더에 생성됨. 없으면 먼저 dist 폴더 생성함
@@ -47,6 +47,6 @@ module.exports = {
 			filename: 'index.html',
 		}),
 		// For typescript. 컴파일 속도 향상을 위한 플러그인
-		new ForkTsCheckerWebpackPlugin({ silent: true }),
+		new ForkTsCheckerWebpackPlugin(),
 	],
 };

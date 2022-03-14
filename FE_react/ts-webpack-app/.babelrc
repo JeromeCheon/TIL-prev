@@ -7,6 +7,8 @@
 			{ "targets": { "browsers": ["last 2 versions", ">= 5% in KR"] } }
 		],
 		// 또 리액트도 컴파일될 수 있도록 함
-		"@babel/react"
+		"@babel/react",
+		// 타입스크립트 파일이 컴파일 가능하도록
+		"@babel/typescript"
 	]
 }
