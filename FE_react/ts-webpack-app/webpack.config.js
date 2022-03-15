@@ -6,6 +6,12 @@ const HtmlWebpackPlugin = require('html-webpack-plugin'); // html을 다루기 �
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 
 module.exports = {
+	// tsx로 정의한 module들 import하기 위해선 다음 설정이 필요함
+	resolve: {
+		extensions: ['.ts', '.tsx', '.js', '.jsx', 'scss'],
+		symlinks: false,
+		cacheWithContext: false,
+	},
 	entry: {
 		// 번들 파일로 만들기 위한 시작 파일 설정
 		// 생성될 번들 파일은 js 폴더 하위에 app.js라는 이름으로 생성될 것이며 이 파일은 ./src/App.jsx를 시작으로 번들링함
