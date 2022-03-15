@@ -55,4 +55,8 @@ module.exports = {
 		// For typescript. 컴파일 속도 향상을 위한 플러그인
 		new ForkTsCheckerWebpackPlugin(),
 	],
+	devServer: {
+		port: 8080,
+		historyApiFallback: true,
+	},
 };
