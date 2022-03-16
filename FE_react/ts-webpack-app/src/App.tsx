@@ -14,7 +14,7 @@ import TaskList from './components/TaskList';
 import store from './lib/redux';
 interface Props {}
 
-const App = ({}: Props) => {
+const App: React.FC<Props> = () => {
 	return (
 		<>
 			<Router>

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 interface Props {}
-const Nav = ({}: Props) => (
+const Nav: React.FC<Props> = () => (
 	<nav>
 		<h3>This is Logo</h3>
 		<ul>
