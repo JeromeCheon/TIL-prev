@@ -1,15 +1,16 @@
 import React from 'react';
+import { Meta, Story } from '@storybook/react';
+import Task, { Props } from './Task';
 
-import Task from './Task';
-
-export default {
+const meta: Meta = {
 	component: Task, // 해당 컴포넌트
 	title: 'Task', // storybook 앱의 사이드바에서 컴포넌트를 참조하는 방법
 };
+export default meta;
 
-const Template = (args): JSX.Element => <Task {...args} />;
+const Template: Story<Props> = (args) => <Task {...args} />;
 
-export const Default: any = Template.bind({}); // 함수의 복사본을 만드는 표준 JS의 한 기법
+export const Default = Template.bind({}); // 함수의 복사본을 만드는 표준 JS의 한 기법
 Default.args = {
 	task: {
 		id: '1',

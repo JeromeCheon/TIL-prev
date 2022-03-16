@@ -1,8 +1,9 @@
 import React from 'react';
-import { PureTaskList } from './TaskList';
+import { Meta, Story } from '@storybook/react';
+import { PureTaskList, TaskListProps } from './TaskList';
 import * as TaskStories from './Task.stories';
 
-export default {
+const taskListMeta: Meta = {
 	component: PureTaskList,
 	title: 'TaskList',
 	// 데코레이터는 스토리에 임의의 wrapper를 제공하는 한 방법
@@ -10,8 +11,9 @@ export default {
 	// 또 데코레이터는 providers에서 스토리를 감싸줄 때 사용될 수 있다
 	decorators: [(story) => <div style={{ padding: '3rem' }}>{story()}</div>],
 };
+export default taskListMeta;
 
-const Template = (args) => <PureTaskList {...args} />;
+const Template: Story<TaskListProps> = (args) => <PureTaskList {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {
