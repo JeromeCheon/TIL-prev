@@ -1,9 +1,9 @@
 import React from 'react';
-import TaskList from './TaskList';
+import { PureTaskList } from './TaskList';
 import * as TaskStories from './Task.stories';
 
 export default {
-	component: TaskList,
+	component: PureTaskList,
 	title: 'TaskList',
 	// 데코레이터는 스토리에 임의의 wrapper를 제공하는 한 방법
 	// 여기서는 key를 사용, 기본 내보내기에서 렌더링 된 컴포넌트에 padding을 추가하는식으로 사용된다
@@ -11,7 +11,7 @@ export default {
 	decorators: [(story) => <div style={{ padding: '3rem' }}>{story()}</div>],
 };
 
-const Template = (args) => <TaskList {...args} />;
+const Template = (args) => <PureTaskList {...args} />;
 
 export const Default = Template.bind({});
 Default.args = {

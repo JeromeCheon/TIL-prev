@@ -9,6 +9,9 @@ import {
 	Switch,
 	Redirect,
 } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import TaskList from './components/TaskList';
+import store from './lib/redux';
 interface Props {}
 
 const App = ({}: Props) => {
@@ -23,6 +26,9 @@ const App = ({}: Props) => {
 					<Route component={() => <Redirect to='/' />} />
 				</Switch>
 			</Router>
+			<Provider store={store}>
+				<TaskList />
+			</Provider>
 		</>
 	);
 };
