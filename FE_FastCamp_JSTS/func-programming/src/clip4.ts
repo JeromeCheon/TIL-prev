@@ -62,10 +62,10 @@ export function getTotalPrice() {
 }
 
 export const compose =
-	(
-		g: (y: number | undefined) => boolean,
-		f: (s: string) => number | undefined
-	) =>
-	(x: string) => {
+	<A, B, C>(g: (y: B) => C, f: (s: A) => B) =>
+	(x: A) => {
 		return g(f(x));
 	};
+
+// <A, B, C>((B) => C, (A) => B) => (A) => C
+// 이런식으로 간단화 해서 compose를 생각해볼 수 있다.
