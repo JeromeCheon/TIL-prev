@@ -60,3 +60,12 @@ export function isExpensivePrice(name: string): boolean {
 export function getTotalPrice() {
 	return list2();
 }
+
+export const compose =
+	(
+		g: (y: number | undefined) => boolean,
+		f: (s: string) => number | undefined
+	) =>
+	(x: string) => {
+		return g(f(x));
+	};
