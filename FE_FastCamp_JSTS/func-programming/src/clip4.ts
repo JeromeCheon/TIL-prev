@@ -29,8 +29,9 @@ const priceOfFruit = {
 	orange: 15000,
 	apple: 10000,
 };
-
-function getPrice(name: string): number {
+// 입력 타입 즉, 정의역은 string이 되는 것이고
+// 아래와 같이 return type, 공역을 number와 undefined의 union type으로 명시해줘
+export function getPrice(name: string): number | undefined {
 	if (name === 'tomato') {
 		return 7000;
 	} else if (name === 'orange') {
@@ -40,7 +41,21 @@ function getPrice(name: string): number {
 	}
 	// 근데 이런식으로 하는 것도 매 문자열을 비교해줘야 하니까 비효율적이네?
 	// dictionary나 map 같은 자료구조로 만들어볼 수 있을텐데 그게 priceOfFruit 오브젝트가 될 것
-	return 0;
+}
+
+export const isExpensive = (price: number | undefined) => {
+	if (price === undefined) {
+		return false;
+	}
+	return price > 10000;
+};
+
+export const main = () => {
+	return isExpensive(getPrice('tomato'));
+};
+// 자 이렇게 함수를 잇는 것을 알아보았으니 하나의 함수로 만들어보는 것을 알아보자.
+export function isExpensivePrice(name: string): boolean {
+	return isExpensive(getPrice(name));
 }
 export function getTotalPrice() {
 	return list2();
