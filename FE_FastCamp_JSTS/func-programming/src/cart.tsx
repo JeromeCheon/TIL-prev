@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 export interface Item {
   code: string;
@@ -7,7 +7,6 @@ export interface Item {
   price: number;
   quantity: number;
 }
-
 export const cart: Array<Item> = [
   {
     code: "tomato",
@@ -31,19 +30,27 @@ export const cart: Array<Item> = [
     quantity: 2,
   },
 ];
-
-export const list = () => {
+export const CartList = () => {
   let html = "";
 
   for (let i = 0; i < cart.length; i++) {
     html += "<li>";
     html += `<h2>${cart[i].name}</h2>`;
     html += `<div>가격: ${cart[i].price}원</div>`;
-    html += `<div>수량: ${cart[i].quantity}개</div>`;
+    html += `<div>수량: ${cart[i].quantity}상자</div>`;
     html += "</li>";
   }
-  const mainBody = document.getElementById("main-body");
-  if (mainBody != null) {
-    mainBody.innerHTML = `<ul>${html}</ul>`;
-  }
+  return html;
 };
+
+const PrintCart: React.FC = () => {
+  useEffect(() => {
+    const mainBody = document.getElementById("main-body");
+    if (mainBody != null) {
+      mainBody.innerHTML = `<h1>장바구니</h1><ul>${CartList()}</ul>`;
+    }
+  });
+  return <></>;
+};
+
+export default PrintCart;
