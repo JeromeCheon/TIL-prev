@@ -32,6 +32,7 @@ export const cart: Array<Item> = [
 ];
 export const CartList = () => {
   let html = "";
+  let totalCount = 0;
 
   for (let i = 0; i < cart.length; i++) {
     html += "<li>";
@@ -39,15 +40,20 @@ export const CartList = () => {
     html += `<div>가격: ${cart[i].price}원</div>`;
     html += `<div>수량: ${cart[i].quantity}상자</div>`;
     html += "</li>";
+    totalCount += cart[i].quantity;
   }
-  return html;
+
+  return [html, totalCount];
 };
 
 const PrintCart: React.FC = () => {
   useEffect(() => {
     const mainBody = document.getElementById("main-body");
     if (mainBody != null) {
-      mainBody.innerHTML = `<h1>장바구니</h1><ul>${CartList()}</ul>`;
+      const [info, totalCount] = CartList();
+      mainBody.innerHTML = `<h1>장바구니</h1>
+      <ul>${info}</ul>
+      <h2>전체 수량: ${totalCount}</h2>`;
     }
   });
   return <></>;
