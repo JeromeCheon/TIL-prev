@@ -14,3 +14,10 @@ a {
 * {
   box-sizing: border-box;
 }
+.gray {
+  color: gray;
+}
+
+.strike {
+  text-decoration: line-through;
+}
