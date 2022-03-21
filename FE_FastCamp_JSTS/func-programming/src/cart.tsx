@@ -19,6 +19,31 @@ export interface Item {
   price: number;
   quantity: number;
 }
+
+const stockItem = (item: Item): string => `
+  <li>
+  <h2>${item.name}</h2>
+  <div>가격: ${item.price}원</div>
+  <div>수량: ${item.quantity}상자</div>
+  </li>
+`;
+
+const outOfStockItem = (item: Item): string => `
+  <li class='gray'>
+  <h2>${item.name} (품절)</h2>
+  <div class='strike'>가격: ${item.price}원</div>
+  <div class='strike'>수량: ${item.quantity}상자</div>
+  </li>
+`;
+
+const considerItem = (item: Item): string => {
+  if (item.outOfStock) {
+    return outOfStockItem(item);
+  } else {
+    return stockItem(item);
+  }
+};
+
 export const cart: Array<Item> = [
   {
     code: "tomato",
@@ -39,33 +64,35 @@ export const cart: Array<Item> = [
     outOfStock: false,
     name: "사과",
     price: 10000,
-    quantity: 2,
+    quantity: 1,
   },
 ];
 export const CartList = () => {
   let html = "";
   let totalCount = 0;
+  let totalAmount = 0;
 
   for (let i = 0; i < cart.length; i++) {
-    html += "<li>";
-    html += `<h2>${cart[i].name}</h2>`;
-    html += `<div>가격: ${cart[i].price}원</div>`;
-    html += `<div>수량: ${cart[i].quantity}상자</div>`;
-    html += "</li>";
-    totalCount += cart[i].quantity;
+    if (cart[i].outOfStock === false) {
+      totalCount += cart[i].quantity;
+      totalAmount += cart[i].price * cart[i].quantity;
+    }
+    html += considerItem(cart[i]);
   }
 
-  return [html, totalCount];
+  return [html, totalCount, totalAmount];
 };
 
 const PrintCart: React.FC = () => {
   useEffect(() => {
     const mainBody = document.getElementById("main-body");
     if (mainBody != null) {
-      const [info, totalCount] = CartList();
+      const [info, totalCount, totalAmount] = CartList();
       mainBody.innerHTML = `<h1>장바구니</h1>
       <ul>${info}</ul>
-      <h2>전체 수량: ${totalCount}</h2>`;
+      <h2>전체 수량: ${totalCount}상자</h2>
+      <h2>전체 가격: ${totalAmount}원</h2>
+      `;
     }
   });
   return <></>;
