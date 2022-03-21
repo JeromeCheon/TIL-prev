@@ -1,5 +1,17 @@
 import React, { useEffect } from "react";
 
+/** 고차 함수를 사용해서 다음 로직을 따라 다시 구현해본다.
+ * 1. 장바구니를 그려야 한다.
+ * -> 장바구니를 순회하면서
+ * -> 화면에 상품 이름, 가격, 수량을 표시한다.
+ *
+ * 2. 전체 가격과 전체 수량도 화면에 그려야 한다.
+ * -> 2번의 동작을 수행할 때 totalPrice, totalCount에 값을 누적한다.
+ *
+ * 3. 재고 없는 상품의 처리
+ * -> 2번과 6번의 동작을 수행할 때 재고 여부에 따라 다르게 동작시킨다.
+ */
+
 export interface Item {
   code: string;
   outOfStock: boolean;
