@@ -1,0 +1,11 @@
+version: '3.9'
+services:
+  sdapp:
+    container_name: sdapp
+    image: sdapp:0.0.1
+    ports:
+      - "8080:8080"
+networks:
+  default:
+    external:
+      name: monitoring
