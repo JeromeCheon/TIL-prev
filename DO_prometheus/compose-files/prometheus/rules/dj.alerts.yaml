@@ -1,0 +1,30 @@
+groups:
+  - name: prometheus-cpu
+    interval: 10s
+    rules:
+      - alert: alerts:cpu_usage:prometheus:80
+        expr: rate(process_cpu_seconds_total{job=~"prometheus"}[1m]) * 100 > 0
+        for: 5s
+        labels:
+          service: prometheus
+          serverity: critical
+        annotations:
+          title: "Prometheus CPU alert 80%"
+          summary: "{{ $labels.instance }}: {{ $value }} ( {{ $labels.job }} )"
+          description: "{{ $labels.instance }}: {{ $value }} ( {{ $labels.job }} )"
+
+  - name: blackbox-monitor
+    interval: 10s
+    limit: 0
+    rules:
+      - alert: alerts:probe_success
+        expr: probe_success == 0
+        for: 5s
+        labels:
+          serverity: critical
+        annotations:
+          title: "black-box monitoring alert"
+          summary: "black-box monitoring alert ( {{ $labels.job }} )"
+          description: "{{ $labels.instance }} is down"
+
+

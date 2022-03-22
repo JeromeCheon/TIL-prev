@@ -1,0 +1,14 @@
+version: '3.8'
+services:
+  black-exporter:
+    container_name: blackbox-exporter
+    image: prom/blackbox-exporter:master
+    ports:
+      - "9115:9115"
+    volumes:
+      - ../../config/blackbox-exporter/blackbox.yml:/config/blackbox.yml
+
+networks:
+  default:
+    external:
+      name: monitoring

@@ -1,0 +1,39 @@
+global:
+  scrape_interval:     15s
+  evaluation_interval: 15s
+
+  external_labels:
+    monitor: 'devops-monitoring'
+
+rule_files:
+
+scrape_configs:
+  - job_name: 'prometheus'
+    scrape_interval: 5s
+    static_configs:
+      - targets: [ 'localhost:9090' ]
+
+  - job_name: 'node'
+    metrics_path: /metrics
+    ec2_sd_configs:
+      - region: ap-northeast-2
+        port: 9100 # node-exporter
+        refresh_interval: 10s # default 60s
+        filters:
+          - name: tag:monitoring
+            values:
+              - 'true'
+    relabel_configs:
+      - source_labels: [ __meta_ec2_private_ip ]
+        regex: '(.*)'
+        replacement: '${1}:9100'
+        action: replace
+        target_label: __address__
+      - source_labels: [ __meta_ec2_tag_Name ]
+        target_label: instance
+      - source_labels: [ __meta_ec2_tag_group ]
+        target_label: group
+      - source_labels: [ __meta_ec2_instance_type ]
+        target_label: instance_type
+      - source_labels: [ __meta_ec2_architecture ]
+        target_label: arch

@@ -1,0 +1,12 @@
+version: '3.8'
+services:
+  node-exporter:
+    container_name: node-exporter
+    image: prom/node-exporter:latest
+    ports:
+      - "9101:9100"
+
+networks:
+  default:
+    external:
+      name: monitoring

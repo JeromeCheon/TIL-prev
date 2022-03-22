@@ -1,0 +1,53 @@
+global:
+  slack_api_url: 'https://hooks.slack.com/services/xxx'
+  smtp_smarthost: 'smtp.gmail.com:587'
+  smtp_auth_username: 'example@gmail.com'
+  smtp_auth_identity: 'example@gmail.com'
+  smtp_auth_password: 'xxx' # myaccount.google.com
+
+route:
+  receiver: 'default-receiver'
+  repeat_interval: 1m # 동일한 alarm이 발생 했을 때 노티 재발생 주기
+  group_interval: 30s # 동일한 group alarm이 발생 했을 때 노티 재발생 주기
+  group_wait: 5s # 해당 group 알람이 왔을 때 대기 시간
+  group_by: [ alertname ]
+  routes:
+    - receiver: 'slack-notifications'
+      continue: true # default false
+    - receiver: 'email-notifications'
+      continue: false
+
+receivers:
+  - name: 'default-receiver'
+  - name: 'email-notifications'
+    email_configs:
+      - to: 'example@gmail.com'
+        from: 'example@gmail.com'
+  - name: 'slack-notifications'
+    slack_configs:
+    - channel: '#alert'
+#      title: "{{ range .Alerts }}{{ .Annotations.summary }}\n{{ end }}"
+#      text: "{{ range .Alerts }}{{ .Annotations.description }}\n{{ end }}"
+      username: 'prometheus'
+      send_resolved: false
+      title: |-
+        [{{ .Status | toUpper }}{{ if eq .Status "firing" }}:{{ .Alerts.Firing | len }}{{ end }}] {{ .CommonLabels.alertname }} for {{ .CommonLabels.job }}
+      text: >-
+        {{ range .Alerts -}}
+        *Alert:* {{ .Annotations.title }}{{ if .Labels.serverity }} - `{{ .Labels.serverity }}`{{ end }}
+
+        *Description:* {{ .Annotations.description }}
+
+        *Details:*
+          {{ range .Labels.SortedPairs }} • *{{ .Name }}:* `{{ .Value }}`
+          {{ end }}
+        {{ end }}
+
+inhibit_rules:
+  - source_match:
+      severity: 'critical'
+    target_match:
+      severity: 'warning'
+    equal: [alertname]
+
+templates: []

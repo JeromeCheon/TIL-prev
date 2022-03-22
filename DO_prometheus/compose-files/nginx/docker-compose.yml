@@ -1,0 +1,32 @@
+version: '3.8'
+services:
+  nginx:
+    container_name: nginx
+    image: nginx:latest
+    ports:
+      - "8080:80"
+    volumes:
+      - ../../config/nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ../../config/nginx/logs:/var/log/nginx
+
+  nginx-prometheus-exporter:
+    container_name: nginx-prometheus-exporter
+    image: nginx/nginx-prometheus-exporter:latest
+    ports:
+      - "9113:9113"
+    command: -nginx.scrape-uri http://nginx/metrics -web.telemetry-path=/metrics
+
+  prometheus-nginxlog-exporter:
+    container_name: prometheus-nginxlog-exporter
+    image: quay.io/martinhelmich/prometheus-nginxlog-exporter
+    ports:
+      - "4040:4040"
+    volumes:
+      - ../../config/prometheus-nginxlog-exporter/prometheus-nginxlog-exporter.yml:/etc/prometheus-nginxlog-exporter.yml
+      - ../../config/nginx/logs:/var/log/nginx
+    command: '-config-file /etc/prometheus-nginxlog-exporter.yml'
+
+networks:
+  default:
+    external:
+      name: monitoring

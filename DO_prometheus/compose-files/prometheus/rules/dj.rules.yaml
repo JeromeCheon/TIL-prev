@@ -1,0 +1,11 @@
+groups:
+  - name: dj-rule
+    interval: 10s
+    limit: 0
+    rules:
+      - record: rules:prometheus_engine_query:speed
+        expr: prometheus_engine_query_duration_seconds_sum / on (slice) group_left prometheus_engine_query_duration_seconds_count
+        labels:
+          dj: test
+
+
