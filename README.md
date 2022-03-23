@@ -65,3 +65,10 @@ Server Side Rendering
 
 - Terraform
   [노션 정리 내용](https://lavender-noodle-3fc.notion.site/DevOps-part4-ef371c7465f44c258026f9584e97d2c1)
+  
+
+### Monitoring & logging
+- AWS CloudWatch
+- Prometheus
+- Grafana
+  [노션 정리 내용](https://lavender-noodle-3fc.notion.site/DevOps-Part7-6dd6059f5f174f3fb735e7abb86426cc)
