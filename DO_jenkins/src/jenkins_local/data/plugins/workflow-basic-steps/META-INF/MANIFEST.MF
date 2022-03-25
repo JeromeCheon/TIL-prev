@@ -1,0 +1,25 @@
+Manifest-Version: 1.0
+Hudson-Version: 2.331
+Plugin-Dependencies: javax-mail-api:1.6.2-5,workflow-api:1122.v7a_916f
+ 363c86,workflow-durable-task-step:1121.va_65b_d2701486,workflow-step-
+ api:622.vb_8e7c15b_c95a_,apache-httpcomponents-client-4-api:4.5.13-1.
+ 0,mailer:408.vd726a_1130320,structs:308.v852b473a2b8c
+Implementation-Title: workflow-basic-steps
+Long-Name: Pipeline: Basic Steps
+Implementation-Version: 941.vdfe1b_a_132c64
+Group-Id: org.jenkins-ci.plugins.workflow
+Minimum-Java-Version: 1.8
+Plugin-License-Name: MIT License
+Specification-Title: The Jenkins Plugins Parent POM Project
+Plugin-ScmUrl: https://github.com/jenkinsci/workflow-basic-steps-plugi
+ n
+Plugin-Version: 941.vdfe1b_a_132c64
+Jenkins-Version: 2.331
+Url: https://github.com/jenkinsci/workflow-basic-steps-plugin
+Short-Name: workflow-basic-steps
+Plugin-License-Url: https://opensource.org/licenses/MIT
+Plugin-Developers: 
+Extension-Name: workflow-basic-steps
+Build-Jdk-Spec: 1.8
+Created-By: Maven Archiver 3.5.1
+

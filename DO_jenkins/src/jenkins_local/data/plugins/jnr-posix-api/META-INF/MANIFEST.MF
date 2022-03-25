@@ -1,0 +1,23 @@
+Manifest-Version: 1.0
+Hudson-Version: 2.303.3
+Implementation-Title: jnr-posix-api
+Long-Name: jnr-posix API Plugin
+Implementation-Version: 3.1.7-3
+Group-Id: io.jenkins.plugins
+Minimum-Java-Version: 1.8
+Support-Dynamic-Loading: true
+Plugin-License-Name: MIT
+Specification-Title: Plugin providing jnr-posix API for other plugins.
+Plugin-ScmUrl: https://github.com/jenkinsci/jnr-posix-api-plugin
+Plugin-Version: 3.1.7-3
+Jenkins-Version: 2.303.3
+Url: https://github.com/jenkinsci/jnr-posix-api-plugin
+Short-Name: jnr-posix-api
+Plugin-License-Url: https://opensource.org/licenses/MIT
+Plugin-Developers: 
+Extension-Name: jnr-posix-api
+Mask-Classes: com.kenai.jffi. com.kenai.jnr. hudson.os.PosixAPI jni. j
+ nr.
+Build-Jdk-Spec: 1.8
+Created-By: Maven Archiver 3.5.2
+

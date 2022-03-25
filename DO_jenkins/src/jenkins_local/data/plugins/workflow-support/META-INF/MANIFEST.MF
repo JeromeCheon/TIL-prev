@@ -1,0 +1,24 @@
+Manifest-Version: 1.0
+Hudson-Version: 2.321
+Plugin-Dependencies: caffeine-api:2.9.2-29.v717aac953ff3,workflow-api:
+ 1136.v7f5f1759dc16,workflow-step-api:622.vb_8e7c15b_c95a_,scm-api:595
+ .vd5a_df5eb_0e39,script-security:1131.v8b_b_5eda_c328e
+Implementation-Title: workflow-support
+Long-Name: Pipeline: Supporting APIs
+Implementation-Version: 815.vd60466279fc8
+Group-Id: org.jenkins-ci.plugins.workflow
+Minimum-Java-Version: 1.8
+Plugin-License-Name: MIT License
+Specification-Title: The Jenkins Plugins Parent POM Project
+Plugin-ScmUrl: https://github.com/jenkinsci/workflow-support-plugin
+Plugin-Version: 815.vd60466279fc8
+Jenkins-Version: 2.321
+Url: https://github.com/jenkinsci/workflow-support-plugin
+Short-Name: workflow-support
+Plugin-License-Url: https://opensource.org/licenses/MIT
+Compatible-Since-Version: 3.0
+Plugin-Developers: 
+Extension-Name: workflow-support
+Build-Jdk-Spec: 1.8
+Created-By: Maven Archiver 3.5.1
+

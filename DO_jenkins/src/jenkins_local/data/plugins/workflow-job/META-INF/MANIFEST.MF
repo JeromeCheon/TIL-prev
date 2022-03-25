@@ -1,0 +1,23 @@
+Manifest-Version: 1.0
+Hudson-Version: 2.321
+Plugin-Dependencies: workflow-api:1122.v7a_916f363c86,workflow-step-ap
+ i:622.vb_8e7c15b_c95a_,workflow-support:813.vb_d7c3d2984a_0
+Implementation-Title: workflow-job
+Long-Name: Pipeline: Job
+Implementation-Version: 1174.vdcb_d054cf74a_
+Group-Id: org.jenkins-ci.plugins.workflow
+Minimum-Java-Version: 1.8
+Plugin-License-Name: MIT License
+Specification-Title: The Jenkins Plugins Parent POM Project
+Plugin-ScmUrl: https://github.com/jenkinsci/workflow-job-plugin
+Plugin-Version: 1174.vdcb_d054cf74a_
+Jenkins-Version: 2.321
+Url: https://github.com/jenkinsci/workflow-job-plugin
+Short-Name: workflow-job
+Plugin-License-Url: https://opensource.org/licenses/MIT
+Compatible-Since-Version: 2.26
+Plugin-Developers: 
+Extension-Name: workflow-job
+Build-Jdk-Spec: 1.8
+Created-By: Maven Archiver 3.5.1
+
