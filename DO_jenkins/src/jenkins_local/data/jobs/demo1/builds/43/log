@@ -1,0 +1,8 @@
+Started by timer
+Started by timer
+Running as SYSTEM
+Building in workspace /var/jenkins_home/workspace/demo1
+[demo1] $ /bin/sh -xe /tmp/jenkins8286942389887087112.sh
++ echo demo1 job is running
+demo1 job is running
+Finished: SUCCESS
