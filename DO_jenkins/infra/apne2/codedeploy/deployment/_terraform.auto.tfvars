@@ -1,6 +1,6 @@
 env   = "dev"
 name  = "dev"
-owner = "dj.kim"
+owner = "jerome"
 tags  = {}
 
 # iam

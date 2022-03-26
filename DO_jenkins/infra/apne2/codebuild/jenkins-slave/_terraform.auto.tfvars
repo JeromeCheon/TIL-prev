@@ -1,6 +1,6 @@
 env   = "dev"
 name  = "jenkins-slave"
-owner = "dj.kim"
+owner = "jerome"
 tags  = {}
 
 # iam

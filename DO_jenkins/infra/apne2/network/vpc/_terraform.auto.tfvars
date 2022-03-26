@@ -1,6 +1,6 @@
 env    = "dev"
 name   = "dev"
-owner  = "dj.kim"
+owner  = "jerome"
 region = "ap-northeast-2"
 
 vpc_cidr        = "10.0.0.0/16"

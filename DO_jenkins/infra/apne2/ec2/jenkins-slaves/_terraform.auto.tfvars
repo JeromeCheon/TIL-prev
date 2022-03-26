@@ -2,7 +2,7 @@ env       = "dev"
 name      = "jenkins-slave"
 slave_cnt = 2
 
-owner = "dj.kim"
+owner = "jerome"
 tags  = {}
 
 # AMI
