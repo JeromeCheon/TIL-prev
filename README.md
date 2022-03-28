@@ -76,5 +76,6 @@ Server Side Rendering
   - 여기에 대한 [노션 정리 내용](https://lavender-noodle-3fc.notion.site/istio-Kiali-a7db6901b2d04903b700da55ee973fb1)
 
 ### CI/CD
-- AWS 기반 IaaS 방식
+#### AWS 기반 IaaS 방식
+- Jenkins
   [노션 정리 내용](https://lavender-noodle-3fc.notion.site/DevOps-Part6-CI-CD-1836a29f346a49df9b5ab16a044da190)
