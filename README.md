@@ -43,6 +43,11 @@ Server Side Rendering
 - nestJS [노션 정리 내용](https://lavender-noodle-3fc.notion.site/NestJS-0b1dd7f7c3db4e21ba5daffd5c43e8cc)
 - Udemy, NomadCoder 강의 및 실습 내용 정리
 
+### Design Pattern
+
+#### DDD(Domain Driven Design)
+- DDD 개념 [노션 정리 내용](https://lavender-noodle-3fc.notion.site/Domain-Driven-Design-DDD-a978a1e4bfe24e768466db4eebdccb35)
+
 ## DevOps
 
 - DevOps 공부는 fastcampus의 DevOps 초격차 강의를 들으면서 수행하였음.
