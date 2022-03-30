@@ -47,6 +47,7 @@ Server Side Rendering
 
 #### DDD(Domain Driven Design)
 - DDD 개념 [노션 정리 내용](https://lavender-noodle-3fc.notion.site/Domain-Driven-Design-DDD-a978a1e4bfe24e768466db4eebdccb35)
+- Layered Architecture
 
 ## DevOps
 
