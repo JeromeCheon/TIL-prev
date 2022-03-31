@@ -51,8 +51,6 @@ Server Side Rendering
 
 ## DevOps
 
-- DevOps 공부는 fastcampus의 DevOps 초격차 강의를 들으면서 수행하였음.
-
 ### AWS 관련
 - AWS Resource 종류 및 특징
   [노션 정리 내용](https://lavender-noodle-3fc.notion.site/AWS-9cbc0a02a3d84acf87f826ff930d9e24)
@@ -66,6 +64,7 @@ Server Side Rendering
 
 - kubernetes
   [노션 정리 내용](https://lavender-noodle-3fc.notion.site/DevOps-Part5-755f952e4f9e4738888685538aa28195)
+- k9s, lens 관련 추가 학습
 
 ### Terraform
 
