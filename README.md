@@ -1,12 +1,14 @@
 # TIL (Today I learn)
 
-This repository is for what I learned today in programming
+This repository is for what I learned today in programming.
 
 ## FE
 
 ### JS and TS
 
-함수형 프로그래밍 학습 -> fastcampus 강의 수강
+- 함수형 프로그래밍 학습 -> fastcampus 강의 수강
+  [노션 정리 내용](https://lavender-noodle-3fc.notion.site/TS-a2bfed3567d3476b910b2f95883b10d4)
+
 
 ### React
 
