@@ -10,6 +10,16 @@ import React, { useEffect } from "react";
  *
  * 3. 재고 없는 상품의 처리
  * -> 2번과 6번의 동작을 수행할 때 재고 여부에 따라 다르게 동작시킨다.
+ *
+ * 그럼 이 페이지를 기능 단위로 구분해본다면 어떤 것들이 있을까?
+ * - 아이템 목록 화면
+ *  - 재고가 있는 아이템
+ *  - 재고가 없는 아이템
+ *
+ * - 전체 수량 표시
+ * - 전체 가격 표시
+ *
+ * 자 이제 구현을 보강해보자.
  */
 
 export interface Item {
@@ -44,6 +54,26 @@ const considerItem = (item: Item): string => {
   }
 };
 
+const totalCount = (): string => {
+  let totalCount = 0;
+  for (let i = 0; i < cart.length; i++) {
+    if (cart[i].outOfStock === false) {
+      totalCount += cart[i].quantity;
+    }
+  }
+  return `<h2>전체 수량: ${totalCount}상자</h2>`;
+};
+
+const totalPrice = (): string => {
+  let totalPrice = 0;
+  for (let i = 0; i < cart.length; i++) {
+    if (cart[i].outOfStock === false) {
+      totalPrice += cart[i].price * cart[i].quantity;
+    }
+  }
+  return `<h2>전체 가격: ${totalPrice}원</h2>`;
+};
+
 export const cart: Array<Item> = [
   {
     code: "tomato",
@@ -69,29 +99,23 @@ export const cart: Array<Item> = [
 ];
 export const CartList = () => {
   let html = "";
-  let totalCount = 0;
-  let totalAmount = 0;
 
   for (let i = 0; i < cart.length; i++) {
-    if (cart[i].outOfStock === false) {
-      totalCount += cart[i].quantity;
-      totalAmount += cart[i].price * cart[i].quantity;
-    }
     html += considerItem(cart[i]);
   }
 
-  return [html, totalCount, totalAmount];
+  return html;
 };
 
 const PrintCart: React.FC = () => {
   useEffect(() => {
     const mainBody = document.getElementById("main-body");
     if (mainBody != null) {
-      const [info, totalCount, totalAmount] = CartList();
+      const info = CartList();
       mainBody.innerHTML = `<h1>장바구니</h1>
       <ul>${info}</ul>
-      <h2>전체 수량: ${totalCount}상자</h2>
-      <h2>전체 가격: ${totalAmount}원</h2>
+      ${totalCount()}
+      ${totalPrice()}
       `;
     }
   });
