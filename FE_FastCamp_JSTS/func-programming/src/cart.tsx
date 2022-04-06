@@ -1,3 +1,4 @@
+import { listenerCount } from "process";
 import React, { useEffect } from "react";
 
 /** 고차 함수를 사용해서 다음 로직을 따라 다시 구현해본다.
@@ -55,6 +56,20 @@ const considerItem = (item: Item): string => {
 };
 // 자 근데 totalCount랑 totalPrice 안의 for문은 거의 똑같지?
 // 이건 고차함수를 만들어서 대체할 수 있다.
+const totalCalculator = (
+  list: Array<Item>,
+  getValue: (item: Item) => number
+): number => {
+  let total = 0;
+  for (let i = 0; i < list.length; i++) {
+    if (list[i].outOfStock === false) {
+      total += getValue(list[i]);
+    }
+  }
+  // 이렇게 만든 totalCalculator를 바탕으로 아래 totalCount와 totalPrice를 refactoring 해보자
+  return total;
+};
+
 const totalCount = (list: Array<Item>): string => {
   let totalCount = 0;
   for (let i = 0; i < list.length; i++) {
