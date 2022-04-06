@@ -53,22 +53,23 @@ const considerItem = (item: Item): string => {
     return stockItem(item);
   }
 };
-
-const totalCount = (): string => {
+// 자 근데 totalCount랑 totalPrice 안의 for문은 거의 똑같지?
+// 이건 고차함수를 만들어서 대체할 수 있다.
+const totalCount = (list: Array<Item>): string => {
   let totalCount = 0;
-  for (let i = 0; i < cart.length; i++) {
-    if (cart[i].outOfStock === false) {
-      totalCount += cart[i].quantity;
+  for (let i = 0; i < list.length; i++) {
+    if (list[i].outOfStock === false) {
+      totalCount += list[i].quantity;
     }
   }
   return `<h2>전체 수량: ${totalCount}상자</h2>`;
 };
 
-const totalPrice = (): string => {
+const totalPrice = (list: Array<Item>): string => {
   let totalPrice = 0;
-  for (let i = 0; i < cart.length; i++) {
-    if (cart[i].outOfStock === false) {
-      totalPrice += cart[i].price * cart[i].quantity;
+  for (let i = 0; i < list.length; i++) {
+    if (list[i].outOfStock === false) {
+      totalPrice += list[i].price * list[i].quantity;
     }
   }
   return `<h2>전체 가격: ${totalPrice}원</h2>`;
@@ -97,11 +98,11 @@ export const cart: Array<Item> = [
     quantity: 1,
   },
 ];
-export const CartList = () => {
+export const CartList = (list: Array<Item>) => {
   let html = "";
 
-  for (let i = 0; i < cart.length; i++) {
-    html += considerItem(cart[i]);
+  for (let i = 0; i < list.length; i++) {
+    html += considerItem(list[i]);
   }
 
   return html;
@@ -111,11 +112,11 @@ const PrintCart: React.FC = () => {
   useEffect(() => {
     const mainBody = document.getElementById("main-body");
     if (mainBody != null) {
-      const info = CartList();
+      const info = CartList(cart);
       mainBody.innerHTML = `<h1>장바구니</h1>
       <ul>${info}</ul>
-      ${totalCount()}
-      ${totalPrice()}
+      ${totalCount(cart)}
+      ${totalPrice(cart)}
       `;
     }
   });
