@@ -111,14 +111,14 @@ export const cart: Array<Item> = [
     quantity: 1,
   },
 ];
-export const CartList = (list: Array<Item>) => {
-  let html = "";
+export const CartList = (cartList: Array<Item>) => {
+  // CartList도 고차함수들로 refactoring 해보자.
 
-  for (let i = 0; i < list.length; i++) {
-    html += considerItem(list[i]);
-  }
-
-  return html;
+  return `${cartList
+    // 1. 목록에 있는 아이템을 태그로 변경
+    .map(considerItem)
+    // 2. 태그의 목록을 모두 하나의 문자열로 연결
+    .reduce((tags, tag) => tags + tag, "")}`;
 };
 
 const PrintCart: React.FC = () => {
