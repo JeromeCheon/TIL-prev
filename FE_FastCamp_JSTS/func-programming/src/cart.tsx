@@ -56,10 +56,17 @@ const considerItem = (item: Item): string => {
 };
 // 자 근데 totalCount랑 totalPrice 안의 for문은 거의 똑같지?
 // 이건 고차함수를 만들어서 대체할 수 있다.
+// 화살표 함수를 익명함수로
 const totalCalculator = (
   list: Array<Item>,
   getValue: (item: Item) => number
 ): number => {
+  // 전체 목록 중 재고가 있는 상품만 getValue를 실행하고 그 값을 모두 더한다. 라는 요구사항
+
+  // 이 요구 사항을 기능적으로 다시 분류를 하면
+  // 1. 재고가 있는 상품만 분류하기
+  // 2. 분류된 상품들에 대해서 getValue 실행하기
+  // 3. getValue가 실행된 값 모두 더하기
   let total = 0;
   for (let i = 0; i < list.length; i++) {
     if (list[i].outOfStock === false) {
@@ -71,22 +78,15 @@ const totalCalculator = (
 };
 
 const totalCount = (list: Array<Item>): string => {
-  let totalCount = 0;
-  for (let i = 0; i < list.length; i++) {
-    if (list[i].outOfStock === false) {
-      totalCount += list[i].quantity;
-    }
-  }
+  const totalCount = totalCalculator(list, (item) => item.quantity);
   return `<h2>전체 수량: ${totalCount}상자</h2>`;
 };
 
 const totalPrice = (list: Array<Item>): string => {
-  let totalPrice = 0;
-  for (let i = 0; i < list.length; i++) {
-    if (list[i].outOfStock === false) {
-      totalPrice += list[i].price * list[i].quantity;
-    }
-  }
+  const totalPrice = totalCalculator(
+    list,
+    (item) => item.price * item.quantity
+  );
   return `<h2>전체 가격: ${totalPrice}원</h2>`;
 };
 
