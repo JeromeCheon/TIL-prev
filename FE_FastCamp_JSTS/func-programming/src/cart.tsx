@@ -64,17 +64,15 @@ const totalCalculator = (
   // 전체 목록 중 재고가 있는 상품만 getValue를 실행하고 그 값을 모두 더한다. 라는 요구사항
 
   // 이 요구 사항을 기능적으로 다시 분류를 하면
-  // 1. 재고가 있는 상품만 분류하기
-  // 2. 분류된 상품들에 대해서 getValue 실행하기
-  // 3. getValue가 실행된 값 모두 더하기
-  let total = 0;
-  for (let i = 0; i < list.length; i++) {
-    if (list[i].outOfStock === false) {
-      total += getValue(list[i]);
-    }
-  }
-  // 이렇게 만든 totalCalculator를 바탕으로 아래 totalCount와 totalPrice를 refactoring 해보자
-  return total;
+  return (
+    list
+      // 1. 재고가 있는 상품만 분류하기
+      .filter((item) => item.outOfStock === false)
+      // 2. 분류된 상품들에 대해서 getValue 실행하기
+      .map(getValue)
+      // 3. getValue가 실행된 값 모두 더하기
+      .reduce((total, value) => total + value, 0)
+  );
 };
 
 const totalCount = (list: Array<Item>): string => {
