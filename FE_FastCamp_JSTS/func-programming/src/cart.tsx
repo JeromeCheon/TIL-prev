@@ -1,4 +1,4 @@
-import { listenerCount } from 'process';
+import { disconnect, listenerCount } from 'process';
 import React, { useEffect } from 'react';
 
 /** 고차 함수를 사용해서 다음 로직을 따라 다시 구현해본다.
@@ -33,10 +33,16 @@ export interface Item {
 }
 
 const stockItem = (item: Item): string => {
+	let saleText = '';
+	let discountPrice = 0;
+	if (item.discountPrice !== undefined) {
+		saleText = `(${item.discountPrice}원 할인)`;
+		discountPrice = item.discountPrice;
+	}
 	return `
   <li>
   <h2>${item.name}</h2>
-  <div>가격: ${item.price}원 (xx원 할인)</div>
+  <div>가격: ${item.price - discountPrice}원 ${saleText}</div>
   <div>수량: ${item.quantity}상자</div>
   </li>
 `;
@@ -100,7 +106,17 @@ const totalPrice = (list: Array<Item>): string => {
 		list,
 		(item) => item.price * item.quantity
 	);
-	return `<h2>전체 가격: ${totalPrice}원 (총 xx원 할인)</h2>`;
+
+	const totalDiscountPrice = totalCalculator(list, (item) => {
+		let discountPrice = 0;
+		if (item.discountPrice !== undefined) {
+			discountPrice = item.discountPrice;
+		}
+		return discountPrice * item.quantity;
+	});
+	return `<h2>전체 가격: ${
+		totalPrice - totalDiscountPrice
+	}원 (총 ${totalDiscountPrice} 할인)</h2>`;
 };
 
 export const cart: Array<Item> = [
