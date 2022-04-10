@@ -29,15 +29,18 @@ export interface Item {
 	readonly name: string;
 	readonly price: number;
 	readonly quantity: number;
+	readonly discountPrice?: number;
 }
 
-const stockItem = (item: Item): string => `
+const stockItem = (item: Item): string => {
+	return `
   <li>
   <h2>${item.name}</h2>
-  <div>가격: ${item.price}원</div>
+  <div>가격: ${item.price}원 (xx원 할인)</div>
   <div>수량: ${item.quantity}상자</div>
   </li>
 `;
+};
 
 const outOfStockItem = (item: Item): string => `
   <li class='gray'>
@@ -97,7 +100,7 @@ const totalPrice = (list: Array<Item>): string => {
 		list,
 		(item) => item.price * item.quantity
 	);
-	return `<h2>전체 가격: ${totalPrice}원</h2>`;
+	return `<h2>전체 가격: ${totalPrice}원 (총 xx원 할인)</h2>`;
 };
 
 export const cart: Array<Item> = [
@@ -107,6 +110,7 @@ export const cart: Array<Item> = [
 		name: '토마토',
 		price: 7000,
 		quantity: 2,
+		discountPrice: 1000,
 	},
 	{
 		code: 'orange',
@@ -114,6 +118,7 @@ export const cart: Array<Item> = [
 		name: '오렌지',
 		price: 15000,
 		quantity: 3,
+		discountPrice: 2000,
 	},
 	{
 		code: 'apple',
