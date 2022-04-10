@@ -24,11 +24,11 @@ import React, { useEffect } from 'react';
  */
 
 export interface Item {
-	code: string;
-	outOfStock: boolean;
-	name: string;
-	price: number;
-	quantity: number;
+	readonly code: string;
+	readonly outOfStock: boolean;
+	readonly name: string;
+	readonly price: number;
+	readonly quantity: number;
 }
 
 const stockItem = (item: Item): string => `
