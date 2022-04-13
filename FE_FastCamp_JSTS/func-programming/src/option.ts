@@ -26,3 +26,24 @@ export const none = (): Option<never> => ({ _tag: "None" });
 export const isSome = <A>(oa: Option<A>): oa is Some<A> => oa._tag === "Some"; // 이렇게 is 를 써서 type guard 사용
 
 export const isNone = <A>(oa: Option<A>): oa is None => oa._tag === "None";
+
+export const fromUndefined = <A>(a: A | undefined): Option<A> => {
+  // 입력값이 undefined 면 None을 return 하고 아니면 some을 리턴한다
+  if (a === undefined) return none();
+  return some(a);
+};
+
+// 자 이제 cart에서 사용된 if 문을 refactoring 해볼텐데,
+// 값이 없으면 지정된 값을 사용한다.
+// 값이 있다면 해당 값을 사용한다.
+// 이러한 역할을 수행하는 함수를 만들어보자. 그 함수의 인자는 뭐가 되어야 할까?
+// Option 타입의 값 하나와 해당 옵션에 대한 값의 타입과 동일한 값을 하나 입력받아야 해
+
+export const getOrElse = <A>(oa: Option<A>, defaultValue: A): A => {
+  // 이 함수는 값이 없을 때 대신 사용할 값을 defaultValue를 통해 줌으로써 옵션으로 감싸진 임의의 타입 A를
+  // 옵션을 제거한 순수한 타입의 A라는 값으로 변경해주는 역할
+  // 값이 없으면 지정된 값을 사용한다.
+  if (isNone(oa)) return defaultValue;
+  // 값이 있다면 해당 값을 사용한다.
+  return oa.value;
+};
