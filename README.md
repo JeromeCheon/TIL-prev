@@ -23,8 +23,6 @@ This repository is for what I learned today in programming.
 
 Client Side Rendering
 
-### Next.js
-
 #### SSG
 
 Static Site Generation
@@ -32,6 +30,8 @@ Static Site Generation
 #### SSR
 
 Server Side Rendering
+
+### Next.js(SSG 기능도)
 
 ## BE
 
