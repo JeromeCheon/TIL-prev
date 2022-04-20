@@ -17,3 +17,5 @@ exports.getTodo = async (req, res, next) => {
 		next(err);
 	}
 };
+
+exports.getTodoById = async (req, res, next) => {};
