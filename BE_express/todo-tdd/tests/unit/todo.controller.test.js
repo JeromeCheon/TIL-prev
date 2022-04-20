@@ -39,6 +39,13 @@ describe('TodoController.getTodoById', () => {
 		await TodoController.getTodoById(req, res, next);
 		expect(next).toHaveBeenCalledWith(errorMessage);
 	});
+	// TodoModel이 데이터베이스에 없을 때 -> 404 에러를 내줘야 겠지
+	it('should return 404 when item doesn t exist', async () => {
+		TodoModel.findById.mockReturnValue(null);
+		await TodoController.getTodoById(req, res, next);
+		expect(res.statusCode).toBe(404);
+		expect(res._isEndCalled()).toBeTruthy();
+	});
 });
 
 describe('TodoController.getTodos', () => {
