@@ -3,7 +3,7 @@ const app = require('../../app');
 const newTodo = require('../mock-data/new-todo.json');
 const endpointUrl = '/todos/';
 
-let firstTodo;
+let firstTodo, newTodoid;
 describe(endpointUrl, () => {
 	// test나 it 나 같다
 	test('GET ' + endpointUrl, async () => {
@@ -24,7 +24,7 @@ describe(endpointUrl, () => {
 	});
 	it('GET todo by id doesn t exist' + endpointUrl + ':todoId', async () => {
 		const response = await request(app).get(
-			endpointUrl + '625f5ff19bd0ca314e546d5d'
+			endpointUrl + '625f5ff19bd0ca314e546d51'
 		);
 		expect(response.statusCode).toBe(404);
 	});
@@ -33,6 +33,7 @@ describe(endpointUrl, () => {
 		expect(response.statusCode).toBe(201);
 		expect(response.body.title).toBe(newTodo.title);
 		expect(response.body.done).toBe(newTodo.done);
+		newTodoId = response.body._id;
 	});
 	it(
 		'should return error 500 on malformed data with POST' + endpointUrl,
@@ -48,4 +49,13 @@ describe(endpointUrl, () => {
 			});
 		}
 	);
+	it('PUT' + endpointUrl, async () => {
+		const testData = { title: 'Make integration test for PUT', done: true };
+		const response = await request(app)
+			.put(endpointUrl + newTodoId)
+			.send(testData);
+		expect(response.statusCode).toBe(200);
+		expect(response.body.title).toBe(testData.title);
+		expect(response.body.done).toBe(testData.done);
+	});
 });

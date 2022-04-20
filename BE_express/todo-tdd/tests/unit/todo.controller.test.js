@@ -61,7 +61,7 @@ describe('TodoController.getTodoById', () => {
 	});
 	it('should call TodoModel.findById with route parameters', async () => {
 		// route param 정할 것
-		req.param.todoId = todoId;
+		req.params.todoId = todoId;
 		await TodoController.getTodoById(req, res, next);
 		expect(TodoModel.findById).toBeCalledWith(todoId);
 	});
