@@ -3,6 +3,7 @@ const app = require('../../app');
 const newTodo = require('../mock-data/new-todo.json');
 const endpointUrl = '/todos/';
 
+let firstTodo;
 describe(endpointUrl, () => {
 	// test나 it 나 같다
 	test('GET ' + endpointUrl, async () => {
@@ -11,6 +12,21 @@ describe(endpointUrl, () => {
 		expect(Array.isArray(response.body)).toBeTruthy();
 		expect(response.body[0].title).toBeDefined();
 		expect(response.body[0].done).toBeDefined();
+		console.log(response.body[0]._id);
+		firstTodo = response.body[0];
+	});
+	// doesn't work properly
+	test('GET by Id ' + endpointUrl + ':todoId', async () => {
+		const response = await request(app).get(endpointUrl + firstTodo._id);
+		expect(response.statusCode).toBe(200);
+		expect(response.body.title).toBe(firstTodo.title);
+		expect(response.body.done).toBe(firstTodo.done);
+	});
+	it('GET todo by id doesn t exist' + endpointUrl + ':todoId', async () => {
+		const response = await request(app).get(
+			endpointUrl + '625f5ff19bd0ca314e546d5d'
+		);
+		expect(response.statusCode).toBe(404);
 	});
 	it('POST' + endpointUrl, async () => {
 		const response = await request(app).post(endpointUrl).send(newTodo);

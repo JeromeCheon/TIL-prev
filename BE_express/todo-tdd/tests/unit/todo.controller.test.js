@@ -21,9 +21,9 @@ describe('TodoController.getTodoById', () => {
 	});
 	it('should call TodoModel.findById with route parameters', async () => {
 		// route param 정할 것
-		req.param.todoId = '1';
+		req.param.todoId = '625f5ff19bd0ca314e546d5d';
 		await TodoController.getTodoById(req, res, next);
-		expect(TodoModel.findById).toBeCalledWith('1');
+		expect(TodoModel.findById).toBeCalledWith('625f5ff19bd0ca314e546d5d');
 	});
 	it('should return json body and response code 200', async () => {
 		TodoModel.findById.mockReturnValue(newTodo);
@@ -33,7 +33,7 @@ describe('TodoController.getTodoById', () => {
 		expect(res._getJSONData()).toStrictEqual(newTodo);
 	});
 	it('should do error handling of getTodoById', async () => {
-		const errorMessage = { message: 'Done property missing' };
+		const errorMessage = { message: 'error finding todomodel' };
 		const rejectedPromise = Promise.reject(errorMessage);
 		TodoModel.findById.mockReturnValue(rejectedPromise);
 		await TodoController.getTodoById(req, res, next);
