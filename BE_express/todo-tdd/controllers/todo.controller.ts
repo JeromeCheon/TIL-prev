@@ -8,3 +8,12 @@ exports.createTodo = async (req, res, next) => {
 		next(err);
 	}
 };
+
+exports.getTodo = async (res, req, next) => {
+	// try {
+	// 	const getModel = await TodoModel
+	// } catch (err) {
+	// 	console.log('getTodo Error message here:');
+	// 	console.error(err);
+	// }
+};
