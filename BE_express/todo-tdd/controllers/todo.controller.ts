@@ -40,7 +40,11 @@ exports.updateTodo = async (req, res, next) => {
 				useFindAndModify: false,
 			}
 		);
-		res.status(200).json(updatedTodo);
+		if (updatedTodo) {
+			res.status(200).json(updatedTodo);
+		} else {
+			res.status(404).json(updatedTodo);
+		}
 	} catch (err) {
 		next(err);
 	}
