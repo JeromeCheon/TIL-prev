@@ -185,3 +185,6 @@ cython_debug/
 .terraform
 # node module
 node_modules/
+
+# db connection info
+*.connect.js
