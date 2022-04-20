@@ -32,6 +32,13 @@ describe('TodoController.getTodoById', () => {
 		expect(res._isEndCalled()).toBeTruthy();
 		expect(res._getJSONData()).toStrictEqual(newTodo);
 	});
+	it('should do error handling of getTodoById', async () => {
+		const errorMessage = { message: 'Done property missing' };
+		const rejectedPromise = Promise.reject(errorMessage);
+		TodoModel.findById.mockReturnValue(rejectedPromise);
+		await TodoController.getTodoById(req, res, next);
+		expect(next).toHaveBeenCalledWith(errorMessage);
+	});
 });
 
 describe('TodoController.getTodos', () => {
