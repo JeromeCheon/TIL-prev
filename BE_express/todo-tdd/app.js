@@ -12,6 +12,9 @@ app.get('/', (req, res) => {
 	res.send('Hello world~!');
 });
 
+// 여기를 주석처리 해줘야 하는 이유는 integration test에서의 supertest 역시
+// express app을 launch 하기 때문
+
 // app.listen(3000, () => {
 // 	console.log('Server is now running!');
 // });
