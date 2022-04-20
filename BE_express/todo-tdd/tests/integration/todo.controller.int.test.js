@@ -17,6 +17,11 @@ describe(endpointUrl, () => {
 				.post(endpointUrl)
 				.send({ title: 'Missing done property' });
 			expect(response.statusCode).toBe(500);
+			expect(response.body).toStrictEqual({
+				// 근데 이렇게 하면 test는 fail나.
+				// pass 시켜주기 위해서는 app.js 내에 middleware를 만들어 줘야함
+				message: 'Todo validation failed: done: Path `done` is required.',
+			});
 		}
 	);
 });
