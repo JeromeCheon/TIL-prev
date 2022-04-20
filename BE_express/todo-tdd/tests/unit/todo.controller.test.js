@@ -2,6 +2,7 @@ const TodoController = require('../../controllers/todo.controller');
 const TodoModel = require('../../model/todo.model');
 const httpMocks = require('node-mocks-http');
 const newTodo = require('../mock-data/new-todo.json');
+const allTodos = require('../mock-data/all-todos.json');
 
 TodoModel.create = jest.fn(); // mock
 TodoModel.find = jest.fn();
@@ -22,6 +23,13 @@ describe('TodoController.getTodos', () => {
 		await TodoController.getTodo(req, res, next);
 		expect(TodoModel.find).toHaveBeenCalledWith({});
 		// TodoModel.find({}); // 안에 값이 없다? 이건 데이터베이스의 모든 document를 다 부를 것
+	});
+	it('should return response with status 200 and all todos', async () => {
+		TodoModel.find.mockReturnValue(allTodos);
+		await TodoController.getTodo(req, res, next);
+		expect(res.statusCode).toBe(200);
+		expect(res._isEndCalled()).toBeTruthy();
+		expect(res._getJSONData()).toStrictEqual(allTodos);
 	});
 });
 
