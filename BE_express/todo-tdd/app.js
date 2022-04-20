@@ -8,6 +8,9 @@ mongodb.connect();
 app.use(express.json()); // integration test 에서 필요한 로직
 
 app.use('/todos', todoRoutes); // CRUD에 사용될 것이다 라는 의미
+app.use((error, req, res, next) => {
+	res.status(500).json({ message: error.message });
+});
 app.get('/', (req, res) => {
 	res.send('Hello world~!');
 });
