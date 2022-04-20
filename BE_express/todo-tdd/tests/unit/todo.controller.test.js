@@ -31,6 +31,13 @@ describe('TodoController.getTodos', () => {
 		expect(res._isEndCalled()).toBeTruthy();
 		expect(res._getJSONData()).toStrictEqual(allTodos);
 	});
+	it('should handle error for getTodo', async () => {
+		const errorMessage = { message: 'Done property missing' };
+		const rejectedPromise = Promise.reject(errorMessage);
+		TodoModel.find.mockReturnValue(rejectedPromise);
+		await TodoController.getTodo(req, res, next);
+		expect(next).toBeCalledWith(errorMessage);
+	});
 });
 
 describe('TodoController.createTodo', () => {

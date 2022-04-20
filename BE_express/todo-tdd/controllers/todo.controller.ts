@@ -14,7 +14,6 @@ exports.getTodo = async (req, res, next) => {
 		const allTodos = await TodoModel.find({});
 		res.status(200).json(allTodos);
 	} catch (err) {
-		console.log('getTodo Error message here:');
-		console.error(err);
+		next(err);
 	}
 };
