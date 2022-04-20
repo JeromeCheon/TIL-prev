@@ -7,8 +7,10 @@ const allTodos = require('../mock-data/all-todos.json');
 TodoModel.create = jest.fn(); // mock
 TodoModel.find = jest.fn();
 TodoModel.findById = jest.fn();
+TodoModel.findByIdAndUpdate = jest.fn();
 
 let req, res, next;
+const todoId = '625f5ff19bd0ca314e546d5d';
 beforeEach(() => {
 	req = httpMocks.createRequest();
 	res = httpMocks.createResponse();
@@ -19,6 +21,16 @@ describe('TodoController.updateTodo', () => {
 	it('should have a updateTodo function', () => {
 		expect(typeof TodoController.updateTodo).toBe('function');
 	});
+	it('should update with TodoModel.findByIdAndUpdate', async () => {
+		req.params.todoId = todoId;
+		req.body = newTodo;
+		await TodoController.updateTodo(req, res, next);
+		// 이런게 필요하대
+		expect(TodoModel.findByIdAndUpdate).toHaveBeenCalledWith(todoId, newTodo, {
+			new: true,
+			useFindAndModify: false,
+		});
+	});
 });
 
 describe('TodoController.getTodoById', () => {
@@ -27,9 +39,9 @@ describe('TodoController.getTodoById', () => {
 	});
 	it('should call TodoModel.findById with route parameters', async () => {
 		// route param 정할 것
-		req.param.todoId = '625f5ff19bd0ca314e546d5d';
+		req.param.todoId = todoId;
 		await TodoController.getTodoById(req, res, next);
-		expect(TodoModel.findById).toBeCalledWith('625f5ff19bd0ca314e546d5d');
+		expect(TodoModel.findById).toBeCalledWith(todoId);
 	});
 	it('should return json body and response code 200', async () => {
 		TodoModel.findById.mockReturnValue(newTodo);
