@@ -4,6 +4,7 @@ const httpMocks = require('node-mocks-http');
 const newTodo = require('../mock-data/new-todo.json');
 
 TodoModel.create = jest.fn(); // mock
+TodoModel.find = jest.fn();
 
 let req, res, next;
 beforeEach(() => {
@@ -16,6 +17,11 @@ describe('TodoController.getTodos', () => {
 	// 1. getTodo function이 있는지 확인
 	it('should have a getTodo function', () => {
 		expect(typeof TodoController.getTodo).toBe('function');
+	});
+	it('should call TodoModel.find({})', async () => {
+		await TodoController.getTodo(req, res, next);
+		expect(TodoModel.find).toHaveBeenCalledWith({});
+		// TodoModel.find({}); // 안에 값이 없다? 이건 데이터베이스의 모든 document를 다 부를 것
 	});
 });
 

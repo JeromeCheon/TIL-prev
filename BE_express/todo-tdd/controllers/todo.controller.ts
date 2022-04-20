@@ -10,10 +10,10 @@ exports.createTodo = async (req, res, next) => {
 };
 
 exports.getTodo = async (res, req, next) => {
-	// try {
-	// 	const getModel = await TodoModel
-	// } catch (err) {
-	// 	console.log('getTodo Error message here:');
-	// 	console.error(err);
-	// }
+	try {
+		await TodoModel.find({});
+	} catch (err) {
+		console.log('getTodo Error message here:');
+		console.error(err);
+	}
 };
