@@ -1,6 +1,8 @@
 # TIL (Today I learn)
 
 This repository is for what I learned today in programming.
+프론트엔드 부터 백엔드, 그리고 DevOps 관련한 테크닉, 툴까지 다양한 분야에서 기본 개념 공부와 실습을 진행한 내용을 담았습니다.
+부족한 점이 많은데 프로젝트 내 버그나 개선 사항 또는 여타 피드백이 있으면 `Issue` 로 남겨주시면 감사드리겠습니다.
 
 ## FE
 
