@@ -69,6 +69,7 @@ Server Side Rendering
 - kubernetes
   [노션 정리 내용](https://lavender-noodle-3fc.notion.site/DevOps-Part5-755f952e4f9e4738888685538aa28195)
 - k9s, lens 관련 추가 학습
+- subicura 가이드, 초격차 강의 내용 기반 실습
 
 ### Terraform
 
