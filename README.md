@@ -58,6 +58,8 @@ Server Side Rendering
 ### AWS 관련
 - AWS Resource 종류 및 특징
   [노션 정리 내용](https://lavender-noodle-3fc.notion.site/AWS-9cbc0a02a3d84acf87f826ff930d9e24)
+- 소규모 아키텍처 실습 -> backend application(Django) 진행
+  - (추후 보완 예정)
 
 ### Docker
 
