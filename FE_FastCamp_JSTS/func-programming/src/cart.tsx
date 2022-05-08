@@ -39,12 +39,13 @@ const stockItem = (item: Item): string => {
 
 	// optionDiscountPrice가 none 이었다면 계속해서 none으로 유지가 되고
 	// 아니면(some이면) 두번째 인자인 함수를 적용함 --> if를 대체
-	const optionSaleText = O.map(
+	const saleText = O.mapOrElse(
 		optionDiscountPrice,
-		(discountPrice) => `${discountPrice}원 할인`
+		(discountPrice) => `${discountPrice}원 할인`,
+		''
 	);
 
-	const saleText = O.getOrElse(optionSaleText, '');
+	// const saleText = O.getOrElse(optionSaleText, '');
 
 	/*
 	let saleText = '';
