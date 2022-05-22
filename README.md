@@ -23,6 +23,7 @@ This repository is for what I learned today in programming.
 - Webpack React App(TS 기반)
 - React Hooks 이용
 - storybook 실습
+- Udemy React 실습 강좌(예정)
 
 #### CSR
 
