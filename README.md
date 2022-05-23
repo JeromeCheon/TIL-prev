@@ -95,3 +95,4 @@ Server Side Rendering
 #### AWS 기반 IaaS 방식
 - Jenkins
   [노션 정리 내용](https://lavender-noodle-3fc.notion.site/DevOps-Part6-CI-CD-1836a29f346a49df9b5ab16a044da190)
+  - 실습은 추후 진행 예정, 현재 사내 시스템을 통한 체화 진행중
