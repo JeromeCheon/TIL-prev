@@ -1,4 +1,4 @@
-const delivery = (present: string, from: string, to: string) => {
+const delivery = (present: string, from: string) => (to: string) => {
 	return `
   보내는 물건: ${present}
   보내는 사람: ${from}
@@ -9,5 +9,8 @@ const delivery = (present: string, from: string, to: string) => {
 export const main = () => {
 	console.clear();
 
-	console.log(delivery('상품권', '엄마', '아들'));
+	const momsPresent = delivery('상품권', '엄마');
+	console.log(momsPresent('아들'));
+	console.log(momsPresent('딸'));
+	console.log(momsPresent('할머니'));
 };
