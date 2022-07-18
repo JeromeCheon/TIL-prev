@@ -40,6 +40,29 @@ export const main2 = () => {
 	// 다른 관점에서 이렇게도 나타낼 것 map :: Array<A> ~> (A => B) => Array<B>
 	numbers.map(isEven);
 	// 이렇게 작은 함수들을 조합해서 더 큰 프로그램을 만들어낸 예시
+
+	// 그렇다면 새로만든 map함수의 타입은 어떻게 될까??
+	// map_ :: (A => B) => Array<A> => Array<B>
 	const map_ = curry2(flip(map));
-	map_(isEven)(numbers);
+	map_(isEven)(numbers); // 지난 5_5에서는 이렇게 모든 인자를 다 열거했었음
+	// 근데 이 새로운 map 함수는 currying이 되어 있어 하나만 넣어도 돼
+	// isEven :: number => boolean
+	// mapIsEven :: Array<number> => Array<boolean>
+	const mapIsEven = map_(isEven);
+	isEven(42);
+	isEven(7);
+
+	mapIsEven(numbers);
+	mapIsEven([]);
+	mapIsEven([42]);
+
+	const omap = curry2(flip(O.map));
+	// optionIsEven :: Option<number> => Option<boolean>
+	const optionIsEven = omap(isEven);
+
+	// 지금까지 우리는 부수효과를 추상화한 자료구조인 배열과 옵션을 만들어보고 사용했음
+	// 그리고 map이라는 부수효과를 동반하는 데이터에 순수함수를 적용할 수 있는 공통적인 인터페이스를 가지고 있는
+	// 함수를 발견했음. (map)
+	optionIsEven(O.some(42));
+	optionIsEven(O.none());
 };
