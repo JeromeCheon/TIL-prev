@@ -45,6 +45,12 @@ const stockItem = (item: ParsedItem): string => {
 `;
 };
 
+const errorItem = (e: ParsedError): string => `
+<li style="color: red">
+	<h2>${e.name}</h2>
+	<div>${e.message}</div>
+`;
+
 const outOfStockItem = (item: ParsedItem): string => `
   <li class='gray'>
   <h2>${item.name} (품절)</h2>
@@ -54,25 +60,21 @@ const outOfStockItem = (item: ParsedItem): string => `
 `;
 
 const renderItem = (item: Item): string => {
-  try {
-    const parsedItem = parseItem(item);
+  const parsedItem = parseItem(item);
+  const render = T.map(parsedItem, (item) => {
     if (item.outOfStock) {
       // 현재 여기에 에러가 나. 왜? Try 내부 성공의 아이템 값을 반환하지 못하기 때문.
       // 이를 해결하기 위해 Try의 map 함수가 사용된다.
       // Try에서의 map은 실패했을 때는 자신 리턴, 성공일 때는 인자로 전달된 데이터를 자신에게 적용해서 그 결과를 리턴
       // 이 과정에서 결과는 바뀌지 않아.
       // 자 이제 try.ts에 map을 구현하자.
-      return outOfStockItem(parsedItem);
+      return outOfStockItem(item);
+      // return outOfStockItem(parsedItem);
     } else {
       return stockItem(item);
     }
-  } catch (e) {
-    return `
-		<li style="color: red">
-			<h2>${item.name}</h2>
-			<div>${e}</div>
-		`;
-  }
+  });
+  return T.getOrElse(render, errorItem);
 };
 
 const totalCalculator = (

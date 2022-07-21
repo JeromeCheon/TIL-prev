@@ -39,3 +39,11 @@ export const getOrElse = <R, E>(
   // 결과가 성공이라면 해당 값을 사용
   return ta.result;
 };
+
+// try의 map은 Option과 크게 다르지 않으나, 한가지 주의해야 할 점은
+// 성공했을 때 결과의 타입은 인자로 주어진 함수에 의해 변경될 수 있지만
+// 에러의 타입은 변경되지 않는다.
+export const map = <E, A, B>(ta: Try<A, E>, f: (a: A) => B): Try<B, E> => {
+  if (isFailed(ta)) return ta;
+  return success(f(ta.result));
+};
