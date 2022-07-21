@@ -2,6 +2,7 @@ import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
 import PrintCart from "../src/cart";
+import PrintCartWithTryCatch from "../src/cartWithTry";
 import styles from "../styles/Home.module.css";
 
 const Home: NextPage = () => {
@@ -14,7 +15,8 @@ const Home: NextPage = () => {
       </Head>
 
       <main className={styles.main} id='main-body'>
-        <PrintCart />
+        {/* <PrintCart /> */}
+        <PrintCartWithTryCatch />
       </main>
       <footer className={styles.footer}>
         <a

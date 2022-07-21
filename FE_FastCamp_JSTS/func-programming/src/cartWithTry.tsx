@@ -4,19 +4,38 @@
 import { cart, Item } from "./cart";
 import React, { useEffect } from "react";
 import * as O from "./option";
+import * as T from "./try";
+
+type ParsedItem = { _tag: "parsedItem" } & Item; // Item 타입을 확장한 형태로 만들었음
+type ParsedError = {
+  name: string;
+  message: string;
+};
+
+// 상품의 개수가 잘못되면 예외를 발생시키는 함수 구현해보자
+// 그리고 validateItem 을 Try를 반환하는 parseItem으로 바꿔보자
+const parseItem = (item: Item): T.Try<ParsedItem, ParsedError> => {
+  if (item.quantity < 1) {
+    return T.failed({
+      name: item.name,
+      message: "상품은 반드시 한개 이상 담아야 합니다.",
+    });
+  } else if (item.quantity > 10) {
+    return T.failed({
+      name: item.name,
+      message: "한 번에 10개를 초과하여 구매할 수 없습니다.",
+    });
+  }
+  // 검증이 완료되었으면 Item type의 값을 ParsedItem 타입의 값으로 변환하여 try 타입으로 리턴해야 함
+  return T.success({
+    _tag: "parsedItem",
+    ...item,
+  });
+};
 
 type ArrayItem = Array<Item>;
 
-// 상품의 개수가 잘못되면 예외를 발생시키는 함수 구현해보자
-const validateItem = (item: Item) => {
-  if (item.quantity < 1) {
-    throw new Error("상품은 반드시 한개 이상 담아야 합니다. ");
-  } else if (item.quantity > 10) {
-    throw new Error("한 번에 10개를 초과하여 구매할 수 없습니다.");
-  }
-};
-
-const stockItem = (item: Item): string => {
+const stockItem = (item: ParsedItem): string => {
   return `
   <li>
   <h2>${item.name}</h2>
@@ -26,7 +45,7 @@ const stockItem = (item: Item): string => {
 `;
 };
 
-const outOfStockItem = (item: Item): string => `
+const outOfStockItem = (item: ParsedItem): string => `
   <li class='gray'>
   <h2>${item.name} (품절)</h2>
   <div class='strike'>가격: ${item.price}원</div>
@@ -36,9 +55,14 @@ const outOfStockItem = (item: Item): string => `
 
 const renderItem = (item: Item): string => {
   try {
-    validateItem(item);
+    const parsedItem = parseItem(item);
     if (item.outOfStock) {
-      return outOfStockItem(item);
+      // 현재 여기에 에러가 나. 왜? Try 내부 성공의 아이템 값을 반환하지 못하기 때문.
+      // 이를 해결하기 위해 Try의 map 함수가 사용된다.
+      // Try에서의 map은 실패했을 때는 자신 리턴, 성공일 때는 인자로 전달된 데이터를 자신에게 적용해서 그 결과를 리턴
+      // 이 과정에서 결과는 바뀌지 않아.
+      // 자 이제 try.ts에 map을 구현하자.
+      return outOfStockItem(parsedItem);
     } else {
       return stockItem(item);
     }
@@ -60,7 +84,7 @@ const totalCalculator = (
       // 1. 재고가 있는 상품만 분류하기
       .filter((item) => {
         try {
-          validateItem(item);
+          parseItem(item);
           return item.outOfStock === false;
         } catch (e) {
           return false;
