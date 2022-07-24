@@ -62,6 +62,7 @@ export const map = <E, A, B>(ta: Try<A, E>, f: (a: A) => B): Try<B, E> => {
 
 // flatMap :: (A => Array<B>) => (Array<A> => Array<B>)
 // map :: (A => B)   => (Array<A> => Array<B>)
+// map이 구조를 보전한다면 flatMap은 구조를 변경하는 역할을 함
 export const KeepSuccess = <E, R>(tas: Array<Try<R, E>>): Array<R> => {
 	const ret = tas.flatMap((ta) => {
 		if (isSuccess(ta)) return [ta.result];
@@ -69,4 +70,34 @@ export const KeepSuccess = <E, R>(tas: Array<Try<R, E>>): Array<R> => {
 	});
 	return ret;
 };
-// 이제 우리가 만든 KeepSuccess를 totalCalculator에 적용해볼 차례.
+// 이제 우리가 만든 KeepSuccess를 totalCalculator에 적용해볼 차례. (ch 6-8)
+// validation 위주의 프로그램을 파싱 위주의 프로그램으로 바꿔봄
+// (ch 6-9) KeepSuccess 함수를 for loop로 구현해보고 flatMap도 구현해보면서
+// 명령형과 선언형에 대한 얘기 진행해보자
+
+export const KeepSuccessWithFor = <E, R>(tas: Array<Try<R, E>>): Array<R> => {
+	const ret: Array<R> = [];
+	// 1. for loop 부터 작성
+	for (const ta of tas) {
+		// 성공인지 여부 확인 작성
+		if (isSuccess(ta)) {
+			// 성공이라면 이걸 누적 해놓을 다른 배열이 필요해
+			ret.push(ta.result);
+		}
+	}
+	return ret;
+};
+
+// flat :: Try<E, Try<E, A>> => Try<E, A>
+export const flat = <A, E>(tta: Try<Try<A, E>, E>): Try<A, E> => {
+	if (isSuccess(tta)) return tta.result;
+	return tta;
+};
+
+// return type이 그냥 B가 아닌 Try B라는 것
+export const flatMap = <A, E, B>(
+	ta: Try<A, E>,
+	f: (a: A) => Try<B, E>
+): Try<B, E> => {
+	return flat(map(ta, f));
+};
