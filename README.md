@@ -12,6 +12,7 @@ This repository is for what I learned today in programming.
   [노션 정리 내용](https://lavender-noodle-3fc.notion.site/TS-a2bfed3567d3476b910b2f95883b10d4)
   - map, reduce, filter 등을 직접 구현해보기
   - Option을 사용해서 더욱 확장하기
+  - Try를 구현하면서 Error Handling도 함수형 프로그래밍으로
   - 복습 하면서 체화해야 (진행중)
 
 
