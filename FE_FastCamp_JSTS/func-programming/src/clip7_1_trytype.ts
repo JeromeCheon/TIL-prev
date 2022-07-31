@@ -37,7 +37,11 @@ const program = (b: boolean) => {
 export const reviewEHandling2 = () => {
 	const a = 'abc';
 	const b = f(a);
-	const c = T.flatMap(b, (b_) => g(b_));
+	// const c = T.flatMap(b, (b_) => g(b_));
+	// const c = T.map(b, (b_) =>
+	// 	T.getOrElse(g(b_), (e) => 3)); // 반환값이 num이 아닌 Try이기 때문에 에러나는 걸 이렇게 flatMap -> Map으로 바꿔서 해결할 수도 있어.
+	// 근데 가급적 다른 함수를 건드리지 않고 Try를 반환하게 해서 flatMap 사용하는 것이 좋아.
+	const c = T.flatMap(b, (b_) => T.success(T.getOrElse(g(b_), (e) => 3)));
 	const d = T.flatMap(c, (c_) => h(c_));
 	const result = T.map(d, (d_) => program(d_));
 	T.getOrElse(result, (e) => handleError(e));

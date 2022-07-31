@@ -36,7 +36,12 @@ export const reviewEHandling = () => {
 	try {
 		const a = 'abc';
 		const b = f(a);
-		const c = g(b);
+		let c;
+		try {
+			c = g(b);
+		} catch (e) {
+			c = 3;
+		}
 		const d = h(c);
 		program(d);
 	} catch (e) {
