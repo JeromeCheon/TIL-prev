@@ -31,13 +31,17 @@ const greeting = (name: string) => {
 const program = (b: boolean) => {
 	console.log(b);
 };
-export const reviewEHandling = () => {
-	const a = 'test';
-	const b = f(a);
-	const c = g(b);
-	const d = h(c);
 
-	program(d);
+export const reviewEHandling = () => {
+	try {
+		const a = 'abc';
+		const b = f(a);
+		const c = g(b);
+		const d = h(c);
+		program(d);
+	} catch (e) {
+		handleError(e);
+	}
 
 	greeting('world');
 	console.log('프로그램이 종료되었습니다.');
