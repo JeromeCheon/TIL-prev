@@ -35,15 +35,12 @@ const program = (b: boolean) => {
 };
 
 export const reviewEHandling2 = () => {
-	try {
-		const a = 'abc';
-		const b = f(a);
-		const c = T.flatMap(b, (b_) => g(b_));
-		const d = T.flatMap(c, (c_) => h(c_));
-		T.map(d, (d_) => program(d_));
-	} catch (e) {
-		handleError(e);
-	}
+	const a = 'abc';
+	const b = f(a);
+	const c = T.flatMap(b, (b_) => g(b_));
+	const d = T.flatMap(c, (c_) => h(c_));
+	const result = T.map(d, (d_) => program(d_));
+	T.getOrElse(result, (e) => handleError(e));
 
 	greeting('world');
 	console.log('프로그램이 종료되었습니다.');
