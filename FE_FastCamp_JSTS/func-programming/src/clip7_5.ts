@@ -65,4 +65,24 @@ const h =
 
 const handleError = (e: unknown) => {
 	// 사용자에게 에러를 알려주는 통합 함수
+	console.log('handleError: ' + e);
+};
+
+const program = (s: boolean) => {
+	console.log(s);
+};
+
+const greeting = (name: string) => {
+	console.log('Hello, ' + name);
+};
+
+export const promMain1 = () => {
+	const a = f('test');
+	const b = flatMap(a, (a_) => g(a_));
+	const c = flatMap(b, (b_) => h(b_));
+	const result = map(c, (c_) => program(c_));
+	// 이렇게 해도 콘솔에 변화가 없는 것은 비동기함수를 실행만 했지 값을 받아와서 리턴해주지 않았기 때문
+	// 이 값을 리턴해주는 함수를 run이라고 명명하고 구현해보자
+	greeting('world');
+	console.log('프로그램 종료');
 };
