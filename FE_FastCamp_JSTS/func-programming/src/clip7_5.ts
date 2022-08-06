@@ -6,6 +6,12 @@
 
 type Async<A> = (ret: (x: A) => void) => void;
 
+const resolve = <A>(a: A): Async<A> => {
+	return (ret) => {
+		ret(a);
+	};
+};
+
 // 그렇다면 Async 에도 map과 flatMap이 있을까? 있긴 한데 그 형태가 좀 달라
 // flatMap 부터 먼저 만들어보자
 const flatMap = <A, B>(a: Async<A>, f: (a: A) => Async<B>): Async<B> => {
@@ -15,6 +21,13 @@ const flatMap = <A, B>(a: Async<A>, f: (a: A) => Async<B>): Async<B> => {
 			b((b_) => ret(b_));
 		});
 	};
+};
+
+// 이제 flatMap을 사용해서 map을 구현해보자.
+const map = <A, B>(a: Async<A>, f: (a: A) => B): Async<B> => {
+	return flatMap(a, (a_) => resolve(f(a_)));
+	// return flatMap(a, (a_) => f(a_)); // 이렇게 하면 에러가 나는데 이유는 이 결과값인 B를 Async<B>에 할당할 수 없기 때문.
+	// Option과 Try에서 해준 역할 비슷한걸 resolve라 명명하고 만들어보자.
 };
 
 // 함수 f, g, h 는 모두 인자를 두개씩 갖고 있는
