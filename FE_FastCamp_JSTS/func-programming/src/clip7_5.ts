@@ -4,14 +4,16 @@
 // CPS는 비동기라고 명명하겠다.
 // Async<A> = ???
 
+type Async<A> = (ret: (x: A) => void) => void;
 // 함수 f, g, h 는 모두 인자를 두개씩 갖고 있는
 // 첫번째 인자는 함수계산에 사용되는 값
 // 두 번째 인자는 계산이 끝나면 결과를 전달할 콜백함수
 // 일단 아래 형태는 커링을 사용해서 함수의 함수형태로 만들 수 있다
 const f =
-	(str: string) =>
+	(str: string): Async<number> =>
 	// 그러면 여기서 아래 리턴하는 콜백이 우리가 구현하고자 하는 비동기 타입일 것. 이제 Async 를 정의해보자.
-	(ret: (x: number) => void): void => {
+	// (ret: (x: number) => void): void => {
+	(ret) => {
 		setTimeout(() => {
 			console.log('f 호출: ' + str);
 			ret(str.length * 2);
@@ -19,8 +21,8 @@ const f =
 	};
 
 const g =
-	(n: number) =>
-	(ret: (x: number) => void): void => {
+	(n: number): Async<number> =>
+	(ret) => {
 		setTimeout(() => {
 			console.log('g 호출: ' + n);
 			ret(n + 1);
@@ -28,8 +30,8 @@ const g =
 	};
 
 const h =
-	(x: number) =>
-	(ret: (x: boolean) => void): void => {
+	(x: number): Async<boolean> =>
+	(ret) => {
 		setTimeout(() => {
 			console.log('h 호출: ' + x);
 			ret(x % 3 === 0);
