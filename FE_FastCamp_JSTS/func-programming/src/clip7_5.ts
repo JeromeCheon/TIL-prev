@@ -1,7 +1,7 @@
 // Promise 소개라는 내용으로 전개
 // Option<A> = None | Some<A>
 // Try<E, A> = Failed<E> | Success<A>
-// CPS는 비동기라고 명명하겠다.
+// CPS는 비동기라고 명명하겠다. Async는 CPS를 표현하는 타입.
 // Async<A> = ???
 
 type Async<A> = (ret: (x: A) => void) => void;
@@ -28,6 +28,12 @@ const map = <A, B>(a: Async<A>, f: (a: A) => B): Async<B> => {
 	return flatMap(a, (a_) => resolve(f(a_)));
 	// return flatMap(a, (a_) => f(a_)); // 이렇게 하면 에러가 나는데 이유는 이 결과값인 B를 Async<B>에 할당할 수 없기 때문.
 	// Option과 Try에서 해준 역할 비슷한걸 resolve라 명명하고 만들어보자.
+};
+
+const run = <A>(a: Async<A>) => {
+	a(() => {
+		return;
+	});
 };
 
 // 함수 f, g, h 는 모두 인자를 두개씩 갖고 있는
@@ -83,6 +89,9 @@ export const promMain1 = () => {
 	const result = map(c, (c_) => program(c_));
 	// 이렇게 해도 콘솔에 변화가 없는 것은 비동기함수를 실행만 했지 값을 받아와서 리턴해주지 않았기 때문
 	// 이 값을 리턴해주는 함수를 run이라고 명명하고 구현해보자
+	run(result);
+	// 원래의 콜백함수가 중첩되어 함수호출이 계속 깊어지던 코드가 이젠 선형적, 평평한 모양의 코드가 되었음
+	// 콜백헬은 사라지고 명령적인 모습과 유사함
 	greeting('world');
 	console.log('프로그램 종료');
 };
