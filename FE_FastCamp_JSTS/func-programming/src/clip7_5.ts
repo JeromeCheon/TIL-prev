@@ -5,6 +5,18 @@
 // Async<A> = ???
 
 type Async<A> = (ret: (x: A) => void) => void;
+
+// 그렇다면 Async 에도 map과 flatMap이 있을까? 있긴 한데 그 형태가 좀 달라
+// flatMap 부터 먼저 만들어보자
+const flatMap = <A, B>(a: Async<A>, f: (a: A) => Async<B>): Async<B> => {
+	return (ret) => {
+		a((a_) => {
+			const b = f(a_);
+			b((b_) => ret(b_));
+		});
+	};
+};
+
 // 함수 f, g, h 는 모두 인자를 두개씩 갖고 있는
 // 첫번째 인자는 함수계산에 사용되는 값
 // 두 번째 인자는 계산이 끝나면 결과를 전달할 콜백함수
