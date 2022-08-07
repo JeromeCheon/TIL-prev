@@ -107,6 +107,7 @@ export const promMain1 = () => {
 	// 이 값을 리턴해주는 함수를 run이라고 명명하고 구현해보자
 	run(result);
   */
+	/*
 	const a = f('test');
 	// 이제 g함수에 a를 적용하려면? a가 Promise이니 바로 넣을 수는 없고 flatMap과 비슷한 함수가 필요해
 	// Promise에서는 then 함수가 그 역할을 대신함
@@ -114,7 +115,15 @@ export const promMain1 = () => {
 	const c = b.then((b_) => h(b_));
 	// 그리고 Promise의 then은 map 함수 역할까지 대신하게 돼
 	const result = c.then((c_) => program(c_));
-	result.catch(handleError); // catch 사용은 Try의 getOrElse 사용을 연상케해
+  result.catch(handleError); // catch 사용은 Try의 getOrElse 사용을 연상케해
+  */
+	// 그리고 중간 변수 사용없이 바로 chaining도 가능해
+	f('abc')
+		// .then((a_) => g(a_)) 또 then에 사용된 함수는 인자를 직접 넘겨주기 때문에 아래와 같이 줄일 수도 있어
+		.then(g)
+		.then(h)
+		.then(program)
+		.catch(handleError);
 	greeting('world');
 	console.log('프로그램 종료');
 };
