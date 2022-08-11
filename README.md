@@ -13,7 +13,8 @@ This repository is for what I learned today in programming.
   - map, reduce, filter 등을 직접 구현해보기
   - Option을 사용해서 더욱 확장하기
   - Try를 구현하면서 Error Handling도 함수형 프로그래밍으로
-  - 복습 하면서 체화해야 (진행중)
+  - Promise 사용 (callback 지옥 -> async-await, Promise ,then/catch 등)
+  - Observable을 통한 반응형 고려
 
 
 ### React
