@@ -63,6 +63,7 @@ const greeting = (name: string) => {
 export const observMain1 = () => {
 	console.clear();
 	run(map(asyncF('test'), (x) => console.log(x)));
+	promiseF('test').then((x) => console.log(x)); // 하나만 출력돼.
 	greeting('world');
 	console.log('프로그램이 종료되었습니다.');
 };
