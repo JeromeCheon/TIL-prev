@@ -36,6 +36,15 @@ const promiseIntegers = (n: number): Promise<Array<number>> =>
 	});
 
 promiseIntegers(5).then((ns) => console.log(ns));
+
+const integerObservable: Async<number> = (ret) => {
+	// promiseInteger 때와 비슷하게 비동기 작업 내의 동기작업은 이런식으로 분리해서 작업 가능
+	const iter = integerGenerator();
+	setInterval(() => {
+		ret(iter());
+	}, 1000);
+};
+
 const onManyIntegers = (n: number) => {
 	const arr = integers(n);
 	console.log(arr);
