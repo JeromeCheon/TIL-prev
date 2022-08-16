@@ -17,6 +17,12 @@ const integers = (n: number): Array<number> => {
 
 type Iterator<A> = () => A;
 type Iterable<A> = () => Iterator<A>;
+
+// Iterator는 값을 출력하고 Observer는 값을 입력받는다.
+// Iterable은 리턴에 리턴이 연속되고, Observable은 입력에 입력이 연속돼
+type Observer<A> = (a: A) => void;
+type Observable<A> = (subscribe: Observer<A>) => void;
+
 // 요청이 있을 때 마다 자연수 값을 생성하면 돼
 // loop 를 써서 값을 한번에 누적하는 대신 함수 사용, 계산을 한번 더 지연
 // 이 integerGenerator는 함수를 리턴하는 함수
