@@ -10,6 +10,18 @@ const observableFromItem = (item: Item) => {
 	return observable;
 };
 
+// 새로운 아이템을 하나 만들고 수량을 하나 증가시켜 돌려주는 함수
+const updateItem = (item: Item): Item => {
+	return { ...item, quantity: item.quantity + 1 };
+};
+
+// 주어진 코드와 아이템을 입력했을 때 인자로 주어진 코드와 아이템의 코드가 일치하면 수량 증가시키는 함수
+const updateItemByCode =
+	(code: string) =>
+	(item: Item): Item => {
+		return item.code === code ? updateItem(item) : item;
+	};
+
 // [1, 2, 3], [a, b, c] => [[1, a], [2, b], [3, c]] 이렇게 만드는 것을 zip이라고 해
 
 // 버튼 이벤트를 옵저버블로 만들고 연결하기 위해 사용하는 함수
