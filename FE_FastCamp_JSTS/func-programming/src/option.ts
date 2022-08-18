@@ -33,6 +33,11 @@ export const fromUndefined = <A>(a: A | undefined): Option<A> => {
 	return some(a);
 };
 
+export const fromNull = <A>(a: A | null): Option<A> => {
+	if (a === null) return none();
+	return some(a);
+};
+
 // 자 이제 cart에서 사용된 if 문을 refactoring 해볼텐데,
 // 값이 없으면 지정된 값을 사용한다.
 // 값이 있다면 해당 값을 사용한다.
