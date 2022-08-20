@@ -54,12 +54,16 @@ export const getOrElse = <A>(oa: Option<A>, defaultValue: A): A => {
 };
 
 // Option의 map 구현하기
-export const map = <A, B>(oa: Option<A>, f: (a: A) => B): Option<B> => {
-	// 값이 없으면 값이 없는 상태를 유지함
-	if (isNone(oa)) return oa;
-	// 값이 있으면 값을 함수에 적용함
-	return some(f(oa.value));
-};
+// export const map = <A, B>(oa: Option<A>, f: (a: A) => B): Option<B> => {
+export const map =
+	<A, B>(f: (a: A) => B) =>
+	(oa: Option<A>): Option<B> => {
+		// currying 으로 만들고, clip9에서 사용하기 위한 형태
+		// 값이 없으면 값이 없는 상태를 유지함
+		if (isNone(oa)) return oa;
+		// 값이 있으면 값을 함수에 적용함
+		return some(f(oa.value));
+	};
 
 export const mapOrElse = <A, B>(
 	oa: Option<A>,
