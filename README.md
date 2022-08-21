@@ -8,13 +8,14 @@ This repository is for what I learned today in programming.
 
 ### JS and TS
 
-- 함수형 프로그래밍 학습 -> fastcampus 강의 수강
+- 함수형 프로그래밍 학습 -> fastcampus 강의 수강 완료
   [노션 정리 내용](https://lavender-noodle-3fc.notion.site/TS-a2bfed3567d3476b910b2f95883b10d4)
   - map, reduce, filter 등을 직접 구현해보기
   - Option을 사용해서 더욱 확장하기
   - Try를 구현하면서 Error Handling도 함수형 프로그래밍으로
   - Promise 사용 (callback 지옥 -> async-await, Promise ,then/catch 등)
-  - Observable을 통한 반응형 고려
+  - Observable을 통한 반응형 고려 (Observer, Observable, lift 함수 구현)
+    - RxJS 라이브러리 사용도 병행
 
 
 ### React
