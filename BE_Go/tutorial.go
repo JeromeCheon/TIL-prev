@@ -2,37 +2,70 @@ package main
 
 import (
 	"fmt"
-	"reflect"
-	"unsafe"
+	"sort"
 )
 
 /*
-문자열의 길이, 즉 음절 개수를 알고 싶으면 rune을 사용하면 된다.
-string 타입은 연속된 바이트 메모리라고 하면 []rune 타입은 글자들의 배열로 이뤄져
-Go는 둘의 상호 타입 변환을 지원하고 있음
-또 string타입과 []byte 타입은 상호 타입 변환이 가능함
-
-문자열 순회는 1. 인덱스 순회 2. []rune 사용 3. range 사용한 순회
+일반적인 배열은 처음 배열을 만들 때 정한 길이에서 더이상 늘어나지 않는 문제도 있었음
+슬라이스는 배열과 비슷하지만 [] 안에 배열의 개수를 적지 않고 선언함
+append를 사용해서 요소를 추가할 수 있고, 여러값을 추가할 수도 있다.
+그러나 append를 사용할 때 예기치 못한 문제를 마주할 수 있다.
 */
+
 func main() {
-	str := "Hello 월드"
-	runes := []rune(str)
+	slice1 := []int{1, 2, 3, 4, 5}
 
-	for i := 0; i < len([]rune(str)); i++ {
-		fmt.Printf(" 타입:%T 값:%d 문자값:%c\n", runes[i], runes[i], runes[i])
+	slice2 := append(slice1, 4, 5)
+	// cap() 함수를 이용해서 슬라이스 capacity 값을 알 수 있음
+	fmt.Println("slice1:", slice1, len(slice1), cap(slice1))
+	fmt.Println("slice2:", slice2, len(slice2), cap(slice2))
+
+	slice1[1] = 100 // slice2 까지 바뀜
+
+	fmt.Println("After change second element")
+	fmt.Println("slice1:", slice1, len(slice1), cap(slice1))
+	fmt.Println("slice2:", slice2, len(slice2), cap(slice2))
+
+	slice1 = append(slice1, 500)
+
+	fmt.Println("After append 500")
+	fmt.Println("slice1:", slice1, len(slice1), cap(slice1))
+	fmt.Println("slice2:", slice2, len(slice2), cap(slice2))
+
+	// range를 사용하면 slice를 복사할 수 있다.
+	slice3 := make([]int, len(slice1))
+	for i, v := range slice1 {
+		slice3[i] = v
 	}
-	for _, v := range str {
-		fmt.Printf(" 타입:%T 값:%d 문자값:%c\n", v, v, v)
+	// 그러나 이걸 append를 사용하면 단순하게 할 수 있다.
+	slice4 := append([]int{}, slice1...)
+	slice1[1] = 600
+	fmt.Println(slice1)
+	fmt.Println(slice3)
+	fmt.Println(slice4)
+	// 내장함수 copy() 함수를 이용해서 복제할 수도 있다.
+	cnt1 := copy(slice3, slice1)
+	fmt.Println(cnt1, slice3)
+
+	// 요소 중간에 추가하기
+	slice5 := []int{1, 2, 3, 4, 5, 6}
+
+	slice5 = append(slice5, 0)
+
+	idx := 2
+
+	for i := len(slice5) - 2; i >= idx; i-- {
+		slice5[i+1] = slice5[i]
 	}
-	fmt.Printf("len(str) = %d\n", len(str))
-	fmt.Printf("len(runes) = %d\n", len(runes))
 
-	str1 := "Hello World!"
-	str2 := str1
-	stringHeader1 := (*reflect.StringHeader)(unsafe.Pointer(&str1))
-	stringHeader2 := (*reflect.StringHeader)(unsafe.Pointer(&str2))
+	slice5[idx] = 100
+	fmt.Println(slice5)
 
-	fmt.Println(stringHeader1)
-	fmt.Println(stringHeader2)
+	// append 함수로 코드 개선하기
+	slice5 = append(slice5[:idx], append([]int{100}, slice5[idx:]...)...)
 
+	// 슬라이스 정렬. Go언어에서 기본 제공하는 sort 패키지를 사용해서 슬라이스를 정렬하는 방법 알아보자
+	s := []int{5, 2, 6, 3, 1, 4}
+	sort.Ints(s) // float 값을 정렬하고 싶다면 Float64s() 함수 사용하면 돼
+	fmt.Println(s)
 }
