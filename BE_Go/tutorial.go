@@ -1,34 +1,38 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"reflect"
+	"unsafe"
+)
 
 /*
-포인터는 왜, 언제 쓰나?
-변수 대입이나 함수 인수 전달은 항상 값을 복사하기 때문에 많은 메모리 공간을 사용하는 문제와 큰 메모리 공간을 복사할 때 발생하는 성능 문제를 안고 있음
-또 다른 공간으로 복사되기 때문에 변경 사항이 적용되지도 않음.
+문자열의 길이, 즉 음절 개수를 알고 싶으면 rune을 사용하면 된다.
+string 타입은 연속된 바이트 메모리라고 하면 []rune 타입은 글자들의 배열로 이뤄져
+Go는 둘의 상호 타입 변환을 지원하고 있음
+또 string타입과 []byte 타입은 상호 타입 변환이 가능함
+
+문자열 순회는 1. 인덱스 순회 2. []rune 사용 3. range 사용한 순회
 */
-
-type User struct {
-	Name string
-	Age  int8
-}
-
-func NewUser(a string, b int8) *User {
-	var u = User{a, b}
-	return &u
-}
-
 func main() {
-	var a int = 500
-	var p *int
-	p = &a
+	str := "Hello 월드"
+	runes := []rune(str)
 
-	fmt.Printf("p의 값: %p\n", p)
-	fmt.Printf("p가 가리키는 메모리의 값: %d\n", *p)
-	*p = 100
-	fmt.Printf("a의 값: %d\n", a)
+	for i := 0; i < len([]rune(str)); i++ {
+		fmt.Printf(" 타입:%T 값:%d 문자값:%c\n", runes[i], runes[i], runes[i])
+	}
+	for _, v := range str {
+		fmt.Printf(" 타입:%T 값:%d 문자값:%c\n", v, v, v)
+	}
+	fmt.Printf("len(str) = %d\n", len(str))
+	fmt.Printf("len(runes) = %d\n", len(runes))
 
-	userPointer := NewUser("AAA", 23)
+	str1 := "Hello World!"
+	str2 := str1
+	stringHeader1 := (*reflect.StringHeader)(unsafe.Pointer(&str1))
+	stringHeader2 := (*reflect.StringHeader)(unsafe.Pointer(&str2))
 
-	fmt.Print(userPointer)
+	fmt.Println(stringHeader1)
+	fmt.Println(stringHeader2)
+
 }
