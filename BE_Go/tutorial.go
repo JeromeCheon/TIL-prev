@@ -1,57 +1,35 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"os"
+)
 
-type Stringer interface {
-	String() string
-}
+func sum(nums ...int) int {
+	sum := 0
 
-type Student struct {
-	Name string
-	Age  int
-}
-
-// func PrintVal(v interface{}) { //  빈 인터페이스를 인수로 받는 함수
-// 	switch t := v.(type) {
-// 	case int:
-// 		fmt.Printf("v is int %v\n", int(t))
-// 	case float64:
-// 		fmt.Printf("v is float64 %v\n", float64(t))
-// 	case string:
-// 		fmt.Printf("v is float64 %v\n", string(t))
-// 	default:
-// 		fmt.Printf("Not Supported type: %T:%v\n", t, t)
-// 	}
-
-// }
-
-// func (s Student) String() string {
-// 	return fmt.Sprintf("안녕! 나는 %d살 %s라고 해", s.Age, s.Name)
-// }
-
-// func main() {
-// 	student := Student{"철수", 12}
-// 	PrintVal(10)
-// 	PrintVal(3.14)
-// 	PrintVal("Hello")
-// 	PrintVal(Student{Age: 15})
-// 	var stringer Stringer
-
-// 	stringer = student
-// 	fmt.Printf("%s\n", stringer.String())
-
-// }
-
-func (s *Student) String() string {
-	return fmt.Sprintf("Student Age:%d", s.Age)
-}
-
-func PrintAge(stringer Stringer) {
-	s := stringer.(*Student)
-	fmt.Printf("Age: %d\n", s.Age)
+	fmt.Printf("nums 타입: %T\n", nums)
+	for _, v := range nums {
+		sum += v
+	}
+	return sum
 }
 
 func main() {
-	s := &Student{Age: 15}
-	PrintAge(s)
+	fmt.Println(sum(1, 2, 3, 4, 5))
+	fmt.Println(sum(10, 20))
+	fmt.Println(sum())
+
+	f, err := os.Create("test.txt")
+	if err != nil {
+		fmt.Println("Failed to create a file")
+		return
+	}
+
+	defer fmt.Println("반드시 호출됨")
+	defer f.Close()
+	defer fmt.Println("파일을 닫았습니다.")
+
+	fmt.Println("파일에 Hello world를 씁니다.")
+	fmt.Fprintln(f, "Hello World")
 }
