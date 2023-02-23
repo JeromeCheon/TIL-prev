@@ -1,4 +1,7 @@
 {
 	"eslint.format.enable": true,
-	"go.formatTool": "gofmt"
+	"go.formatTool": "gofmt",
+	"[go]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	}
 }
