@@ -13,5 +13,6 @@ func main() {
 	mux := http.NewServeMux() // serveMux 인스턴스 생성
 	mux.HandleFunc("/", web.HandleRequest)
 	mux.HandleFunc("/bar", web.HandleRequest)
+	mux.HandleFunc("/student", web.StudentHandler)
 	http.ListenAndServe(":3000", mux) // 두번째 인자가 nil이면 DefaultServeMux를 사용한다는 것
 }
