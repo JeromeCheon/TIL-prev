@@ -2,6 +2,6 @@
 	"eslint.format.enable": true,
 	"go.formatTool": "gofmt",
 	"[go]": {
-		"editor.defaultFormatter": "esbenp.prettier-vscode"
+		"editor.defaultFormatter": "golang.go"
 	}
 }
