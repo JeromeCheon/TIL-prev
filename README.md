@@ -54,6 +54,10 @@ Server Side Rendering
 - nestJS [노션 정리 내용](https://lavender-noodle-3fc.notion.site/NestJS-0b1dd7f7c3db4e21ba5daffd5c43e8cc)
 - Udemy, NomadCoder 강의 및 실습 내용 정리
 
+### Go / Gorilla
+
+- Gorilla/mux를 활용한 RESTful API 웹 어플리케이션 구축
+
 ### Design Pattern
 
 #### DDD(Domain Driven Design)
