@@ -57,6 +57,8 @@ Server Side Rendering
 ### Go / Gorilla
 
 - Gorilla/mux를 활용한 RESTful API 웹 어플리케이션 구축
+- Must Have Tucker의 Go 프로그래밍 책 내용 기반 학습
+- Go 기초 문법 및 실습 내용 [노션 정리](https://jeromecheon.notion.site/Go-lang-1fec58e324ec4e2d9aadf7ae60d94d05)
 
 ### Design Pattern
 
