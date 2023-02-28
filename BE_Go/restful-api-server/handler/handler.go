@@ -2,10 +2,10 @@ package handler
 
 import (
 	"encoding/json"
+	"github.com/gorilla/mux"
 	"net/http"
 	"sort"
-
-	"github.com/gorilla/mux"
+	"strconv"
 )
 
 type Student struct {
@@ -32,11 +32,6 @@ func (s Students) Less(i, j int) bool {
 }
 
 func GetStudentListHandler(w http.ResponseWriter, r *http.Request) {
-	students := make(map[int]Student, 2)
-	students[1] = Student{1, "aaa", 16, 87}
-	students[2] = Student{2, "bbb", 18, 98}
-
-	lastId = 2
 	list := make(Students, 0)
 	for _, student := range students {
 		list = append(list, student)
@@ -47,9 +42,26 @@ func GetStudentListHandler(w http.ResponseWriter, r *http.Request) {
 	json.NewEncoder(w).Encode(list) // JSON 포맷으로 변경
 }
 
+func GetStudentHandler(w http.ResponseWriter, r *http.Request) {
+	vars := mux.Vars(r)
+	id, _ := strconv.Atoi(vars["id"])
+	student, ok := students[id]
+	if !ok {
+		w.WriteHeader(http.StatusNotFound)
+		return
+	}
+	w.WriteHeader(http.StatusOK)
+	w.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(w).Encode(student)
+}
 func MakeWebHandler() http.Handler {
-
 	mux := mux.NewRouter()
 	mux.HandleFunc("/students", GetStudentListHandler).Methods("GET")
+	mux.HandleFunc("/students/{id:[0-9]+}", GetStudentHandler).Methods("GET")
+	students = make(map[int]Student, 2)
+	students[1] = Student{1, "aaa", 16, 87}
+	students[2] = Student{2, "bbb", 18, 98}
+
+	lastId = 2
 	return mux
 }
