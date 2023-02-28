@@ -6,6 +6,7 @@ import (
 	"github.com/stretchr/testify/assert"
 	"net/http"
 	"net/http/httptest"
+	"strings"
 	"testing"
 )
 
@@ -40,4 +41,27 @@ func TestJsonHandler2(t *testing.T) {
 	assert.Equal(http.StatusOK, res.Code)
 	err := json.NewDecoder(res.Body).Decode(&student)
 	assert.Nil(err)
+}
+
+func TestJsonHandler3(t *testing.T) {
+	assert := assert.New(t)
+
+	var student handler.Student
+	mux := handler.MakeWebHandler()
+	res := httptest.NewRecorder()
+	req := httptest.NewRequest("POST", "/students",
+		strings.NewReader(`{"Id": 0, "Name": "ccc", "Age": 15, "Score": 78}`))
+
+	mux.ServeHTTP(res, req)
+	assert.Equal(http.StatusCreated, res.Code)
+
+	res = httptest.NewRecorder()
+	req = httptest.NewRequest("GET", "/students/3", nil)
+	// 추가된 학생 데이터
+	mux.ServeHTTP(res, req)
+
+	assert.Equal(http.StatusOK, res.Code)
+	err := json.NewDecoder(res.Body).Decode(&student)
+	assert.Nil(err)
+	assert.Equal("ccc", student.Name)
 }
