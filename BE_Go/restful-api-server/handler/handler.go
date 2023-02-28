@@ -32,6 +32,11 @@ func (s Students) Less(i, j int) bool {
 }
 
 func GetStudentListHandler(w http.ResponseWriter, r *http.Request) {
+	students := make(map[int]Student, 2)
+	students[1] = Student{1, "aaa", 16, 87}
+	students[2] = Student{2, "bbb", 18, 98}
+
+	lastId = 2
 	list := make(Students, 0)
 	for _, student := range students {
 		list = append(list, student)
@@ -43,13 +48,8 @@ func GetStudentListHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func MakeWebHandler() http.Handler {
+
 	mux := mux.NewRouter()
 	mux.HandleFunc("/students", GetStudentListHandler).Methods("GET")
-
-	students := make(map[int]Student)
-	students[1] = Student{1, "aaa", 16, 87}
-	students[2] = Student{2, "bbb", 18, 98}
-	lastId = 2
-
 	return mux
 }
