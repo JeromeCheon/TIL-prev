@@ -27,3 +27,17 @@ func TestJsonHandler(t *testing.T) {
 	assert.Equal("bbb", list[1].Name)
 
 }
+
+func TestJsonHandler2(t *testing.T) {
+	assert := assert.New(t)
+
+	var student handler.Student
+	mux := handler.MakeWebHandler()
+	res := httptest.NewRecorder()
+	req := httptest.NewRequest("GET", "/students/1", nil)
+
+	mux.ServeHTTP(res, req)
+	assert.Equal(http.StatusOK, res.Code)
+	err := json.NewDecoder(res.Body).Decode(&student)
+	assert.Nil(err)
+}
